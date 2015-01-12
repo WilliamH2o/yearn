@@ -477,7 +477,10 @@ q {
 	padding-left: 1.618em;
 }
 
-address { margin: 0 0 1.5em }
+address {
+	margin: 0 0 1.5em;
+	font-size: .764em;
+}
 
 pre {
 	background: #fff;
@@ -603,7 +606,10 @@ li > ol {
 
 dt { font-weight: bold }
 
-dd { margin: 0 1.5em 1.5em }
+dd {
+	margin: 0 1.5em 1.5em;
+	font-size: .764em;
+}
 
 img {
 	height: auto; /* Make sure images are scaled correctly. */
@@ -1536,6 +1542,8 @@ a:not([href]):hover,
 .page-content,
 .entry-content,
 .entry-summary { margin: 1.5em 0 0 }
+
+.entry-content li { font-size: .764rem; }
 
 article { padding-bottom: 1.6em }
 
