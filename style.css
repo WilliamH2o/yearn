@@ -403,7 +403,7 @@ input,
 select,
 textarea {
 	color: #333;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'lato', sans-serif;
 	/*font-size: 1.7rem;*/
 	line-height: 1.458;
 }
@@ -1414,7 +1414,7 @@ a:not([href]):hover,
 	border-bottom: 1px solid rgba(0,0,0,.5);
 }
 
-.top-bar:first-of-type { font-size: .618rem }
+.top-bar-one { font-size: .618rem }
 
 .top-left,
 .top-right { padding: .236em }
@@ -1422,7 +1422,6 @@ a:not([href]):hover,
 /* site-header */
 .site-header {
 	border-bottom: 1px solid rgba(0,0,0,.5);
-	font-family: 'lato', sans-serif;
 	font-weight: 300;
 	font-size: .764rem;
 }
@@ -2083,7 +2082,7 @@ html, body { font-size: 11pt; }
 		max-width: 100%;
 	}
 
-	.site-branding { padding: 0; }
+	.site-branding { padding: 0; margin-bottom: .2in }
 
 	.entry-title {
 		font-size: 1.618em;
