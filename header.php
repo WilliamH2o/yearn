@@ -52,7 +52,7 @@
 <style>
 /* TODO: add to wp_head	after customizer color picker - make sure its minified*/
 
-	html, body { background: #dddddd; }
+	html, body { background-color: #dddddd; }
 
 	#content .main {
 		background-color: #f7f7f7;
@@ -74,11 +74,12 @@ body, button, input, select, textarea {	color: #333333; }
 	.color-two a,
 	.entry-date,
 	.entry-meta .entry-date a,
-	.widget a {
+	.widget a,
+	.site-description {
 		color:#ffffff; background-color: transparent;
 	}
 
-h1, h2, h3, h4, h5, h6 { color: #70818c; }
+h1, h2, h3, h4, h5, h6 { color: #70818c;}
 
 	.color-two,
 	.widget,
@@ -113,10 +114,10 @@ h1, h2, h3, h4, h5, h6 { color: #70818c; }
 	<header id="masthead" class="site-header color-one full" role="banner"><!--compact -->
 
 		<?php if ( has_nav_menu( 'top' ) ) { ?>
-		<div class=" top-bar color-two ">
+		<div class=" top-bar color-one ">
 			<div class="row middle">
 				<nav id="top-bar-navigation" class=" hmenu col" role="navigation">
-					<?php wp_nav_menu( array( 'theme_location' => 'top' ) ); ?>
+					<?php wp_nav_menu( array( 'theme_location' => 'top','after'	  => '<span>&nbsp;</span>' ) ); ?>
 				</nav><!-- #top-bar-navigation -->
 			</div>
 		</div>
@@ -140,7 +141,7 @@ h1, h2, h3, h4, h5, h6 { color: #70818c; }
 		</div> <!-- .top-bar -->
 		<?php } ?>
 
-		<div class="row">
+		<div class="row middle">
 			<div class="site-branding col">
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<?php 
@@ -161,5 +162,5 @@ h1, h2, h3, h4, h5, h6 { color: #70818c; }
 		</div><!-- .row -->
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content">
+	<div id="content" class="site-content <?php echo ( !is_active_sidebar( 'sidebar-right' ) ? 'full' : '' ); ?>">
 		<div class="row main">

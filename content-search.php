@@ -8,7 +8,7 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'itemized' ); ?>>
 	<header class="entry-header-data">
 		<h3 class="entry-title color-one"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
 		<div class="entry-meta row">
