@@ -172,9 +172,9 @@ a img { border: 0 }
 	-webkit-flex-grow: 1;
 	-ms-flex-positive: 1;
 	flex-grow: 1;
-	-webkit-flex-basis: 0;
-	-ms-flex-preferred-size: 0;
-	flex-basis: 0;
+	-webkit-flex-basis: 100%;
+	-ms-flex-preferred-size: 100%;
+	flex-basis: 100%;
 	max-width: 100%;
 }
 
@@ -307,7 +307,7 @@ a img { border: 0 }
 
 	.lg-25 { width: 25% }
 
-	.top-right {
+	.section-b {
 		-webkit-flex-basis: 23.6%;
 		-ms-flex-preferred-size: 23.6%;
 		flex-basis: 23.6%;
@@ -355,7 +355,7 @@ a img { border: 0 }
 		max-width: 61.8%;
 	}
 
-	.top-left {
+	.section-a {
 		-webkit-flex-basis: 76.4%;
 		-ms-flex-preferred-size: 76.4%;
 		flex-basis: 76.4%;
@@ -416,7 +416,6 @@ h3,
 h4,
 h5,
 h6 {
-	clear: both;
 	margin-bottom: .618em;
 	font-family: 'lato', sans-serif;
 	font-weight: 700;
@@ -1414,10 +1413,10 @@ a:not([href]):hover,
 	border-bottom: 1px solid rgba(0,0,0,.5);
 }
 
-.top-bar-one { font-size: .618rem }
+.top-bar-a { font-size: .618rem }
 
-.top-left,
-.top-right { padding: .236em }
+.section-a,
+.section-b { padding: .236em }
 
 /* site-header */
 .site-header {
@@ -1525,11 +1524,19 @@ a:not([href]):hover,
 	padding-bottom: 1.85em;
 }
 
-.footer-one div.col { width: 100% }
+.footer-two div.col {
+	-webkit-flex-basis: 50%;
+	-ms-flex-preferred-size: 50%;
+	flex-basis: 50%;
+	max-width: 50%;
+}
 
-.footer-two div.col { width: 50% }
-
-.footer-three div.col { width: 33.33333% }
+.footer-three div.col {
+	-webkit-flex-basis: 33%;
+	-ms-flex-preferred-size: 33%;
+	flex-basis: 33%;
+	max-width: 33%;
+}
 
 /***************************************************************
 10.1 Posts and pages
