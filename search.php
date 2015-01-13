@@ -31,7 +31,7 @@ get_header(); ?>
 			<?php if(function_exists('wp_pagenavi')) : ?>
 				<?php wp_pagenavi(); ?>
 			<?php else : ?>
-				<?php yearn_paging_nav(); ?>
+				<?php the_posts_navigation(); ?>
 			<?php endif; ?>
 
 
