@@ -35,6 +35,7 @@
  * verify widget areas and that they are conditional
  * duplicate post status search bar
  * clean search http://192.168.1.125/wptest/?s=Adminimize
+ * editor-style.css
  *
  * */
 ?>
@@ -113,54 +114,11 @@ h1, h2, h3, h4, h5, h6 { color: #70818c;}
 
 	<header id="masthead" class="site-header color-one full" role="banner"><!--compact -->
 
-		<?php if ( has_nav_menu( 'top' ) ) { ?>
-		<div class=" top-bar color-one ">
-			<div class="row middle">
-				<nav id="top-bar-navigation" class=" hmenu col" role="navigation">
-					<?php wp_nav_menu( array( 'theme_location' => 'top','after'	  => '<span>&nbsp;</span>' ) ); ?>
-				</nav><!-- #top-bar-navigation -->
-			</div>
-		</div>
-		<?php } ?>
+		<?php do_action( 'yearn_header' ); ?>
 
-		<?php if (  is_active_sidebar( 'sidebar-left' ) || is_active_sidebar( 'sidebar-right' )  ) { ?>
-		<div class=" top-bar top-bar-widgets color-two ">
-			<div class="row middle">
-				<?php if ( is_active_sidebar( 'top-bar-left' ) ) { ?>
-					<div class="top-left row middle col">
-						<?php dynamic_sidebar( 'top-bar-left' ); ?>
-					</div>
-				<?php } ?>
-
-				<?php if ( is_active_sidebar( 'top-bar-right' ) ) { ?>
-					<div class="top-right row middle col">
-						<?php dynamic_sidebar( 'top-bar-right' ); ?>
-					</div>
-				<?php } ?>
-			</div>
-		</div> <!-- .top-bar -->
-		<?php } ?>
-
-		<div class="row middle">
-			<div class="site-branding col">
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php 
-					if ( get_bloginfo( 'description' ) ) { ?>
-				<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-				<?php } ?>
-			</div>
-			
-			<nav id="site-navigation" class="main-navigation hmenu col" role="navigation">
-				<button class="menu-toggle"><?php _e( 'Primary Menu', '_s' ); ?></button>			
-				<?php if ( has_nav_menu( 'primary_mobile') && wp_is_mobile() ) { 
-					wp_nav_menu( array( 'theme_location' => 'primary_mobile' ) ); 
-				} else { 
-					wp_nav_menu( array( 'theme_location' => 'primary' ) ); 
-				} ?>
-			</nav><!-- #site-navigation -->
-			
-		</div><!-- .row -->
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content <?php echo ( !is_active_sidebar( 'sidebar-right' ) ? 'full' : '' ); ?>">
+	<div id="content" class="site-content <?php echo ( !is_active_sidebar( 'sidebar' ) ? 'full' : '' ); ?>">
 		<div class="row main">
+
+			<?php do_action( 'yearn_content_begin' ); ?>

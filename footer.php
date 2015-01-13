@@ -2,48 +2,24 @@
 /**
  * The template for displaying the footer.
  *
- * Contains the closing of the div#content and div.row and all content after
+ * Contains the closing of div.site-content>div.row
  *
  * @package yearn
  */
 ?>
+		<?php do_action( 'yearn_content_end' ); ?>
+
 		</div><!-- .row -->
-	</div><!-- #content -->
+	</div><!-- .site-content -->
 
-	<footer id="colophon" class="site-footer color-one" role="contentinfo">
-		<div class="row <?php echo yearn_footer_width(); ?>">
+	<?php do_action( 'yearn_footer' ); ?>
 
-		<?php if ( is_active_sidebar( 'footer-first' ) ) { ?>
-			<div class="footer-first col">
-				<?php dynamic_sidebar( 'footer-first' ); ?>
-			</div>
-		<?php } ?>
-		
-		<?php if ( is_active_sidebar( 'footer-second' ) ) { ?>
-			<div class="footer-second col">
-				<?php dynamic_sidebar( 'footer-second' ); ?>
-			</div>
-		<?php } ?>
-		
-		<?php if ( is_active_sidebar( 'footer-third' ) ) { ?>
-			<div class="footer-third col">
-				<?php dynamic_sidebar( 'footer-third' ); ?>
-			</div>
-		<?php } ?>
-		</div>
-	</footer><!-- #colophon -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
 <script>
-	jQuery(document).ready(function($) {
-		var sf = $( 'ul.menu' );
-		sf.superfish( {
-			delay:		500,
-			animation:   {opacity:'show',height:'show'},
-			speed:		'fast'
-		});
-	});
-</script>
+
+
+
 </body>
 </html>
