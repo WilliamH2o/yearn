@@ -18,10 +18,10 @@
 
 	<div class="entry-excerpt">
 		<?php if (has_post_thumbnail($post->ID)) { ?>
-			<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">
-				<?php the_post_thumbnail('feature-sidebar' ); ?>
+			<a href="<?php the_permalink() ?>" ?>">
+				<?php the_post_thumbnail('feature-image' ); ?>
 			</a>
-			<?php // yearn_the_featured_image();
+			<?php
 		} ?>
 		<?php the_excerpt(); ?>
 	</div>

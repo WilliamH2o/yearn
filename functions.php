@@ -40,12 +40,17 @@ function yearn_setup() {
 	 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 	 */
 	add_theme_support( 'post-thumbnails' );
-	add_image_size( 'feature', 2248, 674, true);
-	add_image_size( 'feature-sidebar', 1534, 460, true);
+	add_image_size( 'feature-image', 1534, 460, true);
 
-	// This theme uses wp_nav_menu() in one location.
+	// if Disable Top Menu is unchecked in Customizer > Layout > Header Layout
+	// then register 'top' menu
+	if ( '0' == get_theme_mod( 'yearn_top_bar_top_menu' ) ) {
+		register_nav_menus( array(
+			'top' => __( 'Top Menu', 'yearn' ),
+		) );
+	}
+
 	register_nav_menus( array(
-		'top' => __( 'Top Menu', 'yearn' ),
 		'primary' => __( 'Primary Menu', 'yearn' ),
 		'footer' => __( 'Footer Menu', 'yearn' ),
 	) );
@@ -71,10 +76,10 @@ function yearn_setup() {
 	) );
 
 	// Setup the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'yearn_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	) ) );
+//	add_theme_support( 'custom-background', apply_filters( 'yearn_custom_background_args', array(
+//		'default-color' => 'ffffff',
+//		'default-image' => '',
+//	) ) );
 }
 endif; // yearn_setup
 
@@ -85,24 +90,6 @@ endif; // yearn_setup
  * @link http://codex.wordpress.org/Function_Reference/register_sidebar
  */
 function yearn_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Top Bar Left', 'yearn' ),
-		'id'            => 'top-bar-section-a',
-		'description'   => '',
-		'before_widget' => '<div id="%1$s" class="widget %2$s col">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
-	register_sidebar( array(
-		'name'          => __( 'Top Bar Right', 'yearn' ),
-		'id'            => 'top-bar-section-b',
-		'description'   => '',
-		'before_widget' => '<div id="%1$s" class="widget %2$s col">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
 	register_sidebar( array(
 		'name'          => __( 'Sidebar', 'yearn' ),
 		'id'            => 'sidebar',
@@ -152,7 +139,7 @@ function yearn_scripts() {
 		wp_enqueue_style( 'yearn-parent-style', get_template_directory_uri() . '/style.css' );
 	}
 
-	wp_enqueue_style( 'yearn-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'yearn-style', get_stylesheet_uri(), array(),'143' );
 
 	wp_enqueue_script( 'yearn-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
@@ -165,7 +152,8 @@ function yearn_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-	
+
+
 	
 }
 // Add HTTP_USER_AGENT IE Fixes and other IE fixes to <head>
@@ -191,17 +179,17 @@ if ( ! function_exists('unc_http_user_agent_ie')) {
 add_action( 'wp_head', 'unc_favicons', 20 );
 if ( ! function_exists('unc_favicons')) {
 	function unc_favicons() { 
-		echo '<!-- For IE 9 and below. ICO should be 32x32 pixels in size -->';
+		// For IE 9 and below. ICO should be 32x32 pixels in size
 		echo '<!--[if IE]><link rel="shortcut icon" href="path/to/favicon.ico"><![endif]-->';
 
-		echo '<!-- IE 10+ "Metro" Tiles - 144x144 pixels in size -->';
+		// IE 10+ "Metro" Tiles - 144x144 pixels in size
 		echo '<meta name="msapplication-TileColor" content="#D83434">';
 		echo '<meta name="msapplication-TileImage" content="path/to/tileicon.png">';
 
-		echo '<!-- Touch Icons - iOS and Android 2.1+ 152x152 pixels in size. -->';
+		// Touch Icons - iOS and Android 2.1+ 152x152 pixels in size.
 		echo '<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">';
 
-		echo '<!-- Firefox, Chrome, Safari, IE 11+ and Opera. 96x96 pixels in size. -->';
+		// Firefox, Chrome, Safari, IE 11+ and Opera. 96x96 pixels in size.
 		echo '<link rel="icon" href="path/to/favicon.png">';
 	}
 }
@@ -252,16 +240,13 @@ function dequeue_jquery_migrate( &$scripts){
 /**
  * new the_excerpt
  */
-//add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
-//
-//function custom_excerpt_length( $length ) {
-//	return 40;
-//}
-//
-//add_filter('excerpt_more', 'new_excerpt_more');
-//function new_excerpt_more( $more ) {
-//	return ' <a title="'. get_the_title( get_the_ID() ) .'" class="read-more" href="'. get_permalink( get_the_ID() ) . '">' . 'read more</a>';
-//}
+
+
+function yearn_excerpt_length( $length ) {
+	return 75;
+}
+add_filter( 'excerpt_length', 'yearn_excerpt_length', 999 );
+
 
 /**
  * Web Fonts and Icons
@@ -306,12 +291,20 @@ if ( ! function_exists('shadeColor')) {
 
 /**
  * Add support for Vertical Featured Images
+ *
+ * gist.github.com/johnregan3/8225770
+ *
+ * @param $html
+ * @param $post_id
+ * @param $post_thumbnail_id
+ * @param $size
+ * @param $attr
+ * @return mixed
  */
-if ( ! function_exists( 'mytheme_vertical_check' ) ) {
-	function mytheme_vertical_check($html, $post_id, $post_thumbnail_id, $size, $attr)
+if ( ! function_exists( 'yearn_vertical_check' ) ) {
+	function yearn_vertical_check($html, $post_id, $post_thumbnail_id, $size, $attr)
 	{
-
-		$image_data = wp_get_attachment_image_src($post_thumbnail_id, 'feature-sidebar');
+		$image_data = wp_get_attachment_image_src($post_thumbnail_id, 'feature-image');
 
 		//Get the image width and height from the data provided by wp_get_attachment_image_src()
 		$width = $image_data[1];
@@ -324,7 +317,7 @@ if ( ! function_exists( 'mytheme_vertical_check' ) ) {
 	}
 }
 
-add_filter( 'post_thumbnail_html', 'mytheme_vertical_check', 10, 5 );
+add_filter( 'post_thumbnail_html', 'yearn_vertical_check', 10, 5 );
 
 /**
  * Filter wp_link_pages to wrap current page in span.

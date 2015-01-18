@@ -7,9 +7,11 @@
  * @package yearn
  */
 
+$yearn_content_columns = get_theme_mod( 'yearn-pages-sections' );
+
 get_header(); ?>
 
-	<div id="primary" class="content-area col">
+	<div id="primary" class="<?php yearn_content_columns( $yearn_content_columns ); ?> content-area col">
 		<main id="main" class="site-main" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -28,5 +30,9 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
+<?php
+if ( 'two_column' == $yearn_content_columns ) {
+	get_sidebar();
+}
+?>
 <?php get_footer(); ?>

@@ -90,11 +90,11 @@ function yearn_entry_meta() {
 
 	if ( is_single() ) {
 		$posted_on = sprintf(
-			'<span class="entry-date meta col" title=" article date"> ' . $time_string . ' </span>'
+			'<span class="entry-date meta col color-one" title=" article date"> ' . $time_string . ' </span>'
 		);
 	} else {
 		$posted_on = sprintf(
-			'<span class="entry-date meta col" title=" article date"><a href="' . get_the_permalink() . '" class=" color-one " >' . $time_string . ' </span></a>'
+			'<span class="entry-date meta col color-one" title=" article date"><a href="' . get_the_permalink() . '">' . $time_string . ' </span></a>'
 		);
 	}
 
@@ -197,3 +197,9 @@ function yearn_category_transient_flusher() {
 }
 add_action( 'edit_category', 'yearn_category_transient_flusher' );
 add_action( 'save_post',     'yearn_category_transient_flusher' );
+
+function yearn_content_columns( $columns ) {
+	if ( 'one_column' == $columns) {
+		echo 'full';
+	}
+}

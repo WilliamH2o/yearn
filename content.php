@@ -21,8 +21,7 @@
 
 	<div class="entry-excerpt">
 		<?php if (has_post_thumbnail($post->ID)) {
-			the_post_thumbnail('feature-sidebar' );
-			// yearn_the_featured_image();
+			the_post_thumbnail('feature-image' );
 		} ?>
 		<?php the_excerpt(); ?>
 	</div>
