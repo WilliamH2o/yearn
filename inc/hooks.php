@@ -24,6 +24,7 @@
 /**
  * Outputs #yearn-top-bar and do_action( 'yearn_topbar' )
  */
+
 if ( ! function_exists( 'yearn_topbar' ) ) {
 	function yearn_topbar() {
 		if ( has_action( 'yearn_topbar' ) && '0' == get_theme_mod( 'yearn-topbar-display' ) ) { ?>
@@ -98,7 +99,7 @@ add_action( 'yearn_header', 'yearn_stripe', 20 );
  */
 if ( ! function_exists( 'yearn_site_header' ) ) {
 	function yearn_site_header() {
-		if ( has_action( 'yearn_site_header' ) && '0' == get_theme_mod( 'yearn-header-display' )) { ?>
+		if ( has_action( 'yearn_site_header' ) && '0' == get_theme_mod( 'yearn-header-display' ) ) { ?>
 
 
 			<div id="yearn-site-header">
@@ -208,8 +209,6 @@ function yearn_init_widgets($theme_mod_id, $for, $name) {
 
 	$sections = get_theme_mod( $theme_mod_id );
 
-	$a_section = explode( '-' ,$sections);
-
 	for ($i = 1; $i <= substr_count($sections, 'widget'); $i++) {
 
 		register_sidebar(array(
@@ -223,115 +222,7 @@ function yearn_init_widgets($theme_mod_id, $for, $name) {
 		));
 
 	}
-
-	/*if ( 'none' != $sections ) {
-
-		register_sidebar(array(
-			'name' => $name . ' A',
-			'id' => $for . '-0',
-			'description' => __('First ' . $name . ' Widget Area', 'yearn'), // todo: if this doesn't translate then remove description
-			'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h1 class="widget-title">',
-			'after_title' => '</h1>',
-		));
-
-
-		if ( 'full' != $sections && 'logo-large' != $sections) {
-			register_sidebar(array(
-				'name' => $name . ' B',
-				'id' => $for . '-1',
-				'description' => __('Second ' . $name . ' Widget Area', 'yearn'),
-				'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
-				'after_widget' => '</aside>',
-				'before_title' => '<h1 class="widget-title">',
-				'after_title' => '</h1>',
-			));
-		}
-
-		if ('small-small-small' == $sections) {
-			register_sidebar(array(
-				'name' => $name . ' C',
-				'id' => $for . '-2',
-				'description' => __('Third ' . $name . ' Widget Area', 'yearn'),
-				'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
-				'after_widget' => '</aside>',
-				'before_title' => '<h1 class="widget-title">',
-				'after_title' => '</h1>',
-			));
-		}
-	}*/
-
 }
-
-
-/**
- * Dead?
- * Outputs do_action( 'yearn_top_bar_b_section_a' ) to div.section-a
- */
-/*
-//if ( ! function_exists( 'yearn_top_bar_b_section_a' ) ) {
-//	function yearn_top_bar_b_section_a() { ?>
-<!---->
-<!--		--><?php //if ( has_action( 'yearn_top_bar_b_section_a' ) ) { ?>
-<!--			<div class="section-a row middle col">-->
-<!--				--><?php //do_action( 'yearn_top_bar_b_section_a' ); ?>
-<!--			</div>-->
-<!--		--><?php //} ?>
-<!---->
-<!--	--><?php //}
-//}
-//add_action( 'yearn_top_bar_b', 'yearn_top_bar_b_section_a', 10 );
-*/
-
-/**
- * dead?
- * Outputs dynamic_sidebar( 'top-bar-section-a' )
- *
- * Hooked to 'yearn_top_bar_b_section_a' via yearn_call_actions()
- */
-/*if ( ! function_exists( 'yearn_section_a_widgets' ) ) {
-	function yearn_section_a_widgets() { */?><!--
-
-		<?php /*dynamic_sidebar( 'top-bar-section-a' ); */?>
-
-	--><?php /*}
-}
-add_action( 'yearn_top_bar_b_section_a', 'yearn_section_a_widgets' );*/
-
-
-/**
- * dead?
- * Outputs do_action( 'yearn_top_bar_b_section_b' ) to div.section-b
-  */
-/*if ( ! function_exists( 'yearn_top_bar_b_section_b' ) ) {
-	function yearn_top_bar_b_section_b() { */?><!--
-
-		<?php /*if ( has_action( 'yearn_top_bar_b_section_b' ) ) { */?>
-			<div class="section-b row middle col">
-				<?php /*do_action( 'yearn_top_bar_b_section_b' ); */?>
-			</div>
-		<?php /*} */?>
-
-	--><?php /*}
-}
-add_action( 'yearn_top_bar_b', 'yearn_top_bar_b_section_b', 10 );*/
-
-/**
- * dead
- * Outputs dynamic_sidebar( 'top-bar-section-b' )
- *
- * Hooked to 'yearn_top_bar_b_section_b' via yearn_call_actions()
- */
-/*if ( ! function_exists( 'yearn_top_bar_b_section_b_widgets' ) ) {
-	function yearn_section_b_widgets() { */?><!--
-
-		<?php /*dynamic_sidebar( 'top-bar-section-b' ); */?>
-
-	--><?php /*}
-}*/
-
-
 
 /**
  * Outputs site-branding components
@@ -340,9 +231,20 @@ if ( ! function_exists( 'yearn_site_branding' ) ) {
 	function yearn_site_branding() { ?>
 
 			<div class="site-branding">
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<h1 class="site-title">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+						<?php
+						if ( '0' == get_theme_mod( 'yearn-blogname-hide' ) ) {
+							bloginfo( 'name' );
+						}
+						if ( get_theme_mod( 'yearn-logo_image' ) ) { ?>
+							<img src="<?php echo esc_url( get_theme_mod( 'yearn-logo_image' ) ) ?>" alt="" />
+						<?php }
+						?>
+					</a>
+				</h1>
 				<?php
-				if ( get_bloginfo( 'description' ) ) { ?>
+				if ( get_bloginfo( 'description' ) && '0' == get_theme_mod( 'yearn-blogdescription-hide' ) ) { ?>
 					<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
 				<?php } ?>
 			</div><!-- .site-branding -->

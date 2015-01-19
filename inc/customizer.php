@@ -135,9 +135,18 @@ function yearn_customize_register( $wp_customize )
 
 		}
 	}
+	$wp_customize->get_section('title_tagline')->title = __( 'Branding', 'yearn' );
+	$wp_customize->get_control('blogdescription')->priority = 3;
+	$wp_customize->get_control('blogname')->priority = 1;
 
-	$wp_customize->get_setting('blogname')->transport = 'postMessage';
-	$wp_customize->get_setting('blogdescription')->transport = 'postMessage';
+	yearn_customize_setting_checkbox($wp_customize, 'yearn-blogname-hide', 0, 'refresh', __('Disable Site Title', 'yearn'), 'title_tagline', 2);
+
+	yearn_customize_setting_checkbox($wp_customize, 'yearn-blogdescription-hide', 0, 'refresh', __('Disable Site Descriptions', 'yearn'), 'title_tagline', 4);
+
+	yearn_customize_setting_image($wp_customize, 'yearn-logo_image', 'refresh', __('Logo Image', 'yearn'), 'title_tagline', 6);
+
+//	$wp_customize->get_setting('blogname')->transport = 'postMessage';
+//	$wp_customize->get_setting('blogdescription')->transport = 'postMessage';
 
 	$wp_customize->get_section('nav')->title = __('Menus', 'yearn');
 //	$wp_customize->add_control(
@@ -611,8 +620,9 @@ function yearn_customize_section( $wp_customize, $name, $title, $panel ) {
  * @param $transport
  * @param $label
  * @param $section
+ * @param int $priority
  */
-function yearn_customize_setting_checkbox( $wp_customize, $name, $default, $transport, $label, $section ) {
+function yearn_customize_setting_checkbox( $wp_customize, $name, $default, $transport, $label, $section, $priority = 50 ) {
 	$wp_customize->add_setting(
 		$name,
 		array(
@@ -624,9 +634,31 @@ function yearn_customize_setting_checkbox( $wp_customize, $name, $default, $tran
 	$wp_customize->add_control(
 		$name,
 		array(
-			'type'     => 'checkbox',
-			'label'    => $label,
-			'section'  => $section,
+			'type'		=> 'checkbox',
+			'label'		=> $label,
+			'section'	=> $section,
+			'priority'	=> $priority,
+		)
+	);
+}
+
+function yearn_customize_setting_image( $wp_customize, $name, $transport, $label, $section, $priority = 50 ) {
+	$wp_customize->add_setting(
+		$name,
+		array(
+			'transport'	=> $transport,
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			$name,
+			array(
+				'label'		=> $label,
+				'section'	=> $section,
+				'priority'	=> $priority,
+			)
 		)
 	);
 }

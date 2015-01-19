@@ -1200,7 +1200,10 @@ and Blueprint http://www.blueprintcss.org/
 			margin-top: 1em;
 		}
 
-		#masthead .widget { border-width: 0; }
+		#masthead .widget {
+			border-width: 0;
+			/*cle*/
+		}
 	}
 
 	/**
@@ -2429,7 +2432,7 @@ and Blueprint http://www.blueprintcss.org/
 }
 
 /***************************************************************
-	#.# Print
+#.# Print
 ***************************************************************/
 
 @page { size:8.5in 11in; margin: 25mm }
