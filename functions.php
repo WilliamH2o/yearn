@@ -99,33 +99,33 @@ function yearn_widgets_init() {
 		'before_title'  => '<h1 class="widget-title">',
 		'after_title'   => '</h1>',
 	) );
-		register_sidebar( array(
-		'name'          => __( 'Footer First', 'yearn' ),
-		'id'            => 'footer-first',
-		'description'   => '',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
-	register_sidebar( array(
-		'name'          => __( 'Footer Second', 'yearn' ),
-		'id'            => 'footer-second',
-		'description'   => '',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
-	register_sidebar( array(
-		'name'          => __( 'Footer Third', 'yearn' ),
-		'id'            => 'footer-third',
-		'description'   => '',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
+//		register_sidebar( array(
+//		'name'          => __( 'Footer First', 'yearn' ),
+//		'id'            => 'footer-first',
+//		'description'   => '',
+//		'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
+//		'after_widget'  => '</aside>',
+//		'before_title'  => '<h1 class="widget-title">',
+//		'after_title'   => '</h1>',
+//	) );
+//	register_sidebar( array(
+//		'name'          => __( 'Footer Second', 'yearn' ),
+//		'id'            => 'footer-second',
+//		'description'   => '',
+//		'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
+//		'after_widget'  => '</aside>',
+//		'before_title'  => '<h1 class="widget-title">',
+//		'after_title'   => '</h1>',
+//	) );
+//	register_sidebar( array(
+//		'name'          => __( 'Footer Third', 'yearn' ),
+//		'id'            => 'footer-third',
+//		'description'   => '',
+//		'before_widget' => '<aside id="%1$s" class="widget %2$s col">',
+//		'after_widget'  => '</aside>',
+//		'before_title'  => '<h1 class="widget-title">',
+//		'after_title'   => '</h1>',
+//	) );
 }
 add_action( 'widgets_init', 'yearn_widgets_init' );
 
@@ -136,10 +136,10 @@ add_action( 'wp_enqueue_scripts', 'yearn_scripts' );
 function yearn_scripts() {
 
 	if ( is_child_theme() ) {
-		wp_enqueue_style( 'yearn-parent-style', get_template_directory_uri() . '/style.css' );
+		wp_enqueue_style( 'yearn-parent-style', get_template_directory_uri() . '/style.css', array(), '123' );
 	}
 
-	wp_enqueue_style( 'yearn-style', get_stylesheet_uri(), array(),'143' );
+	wp_enqueue_style( 'yearn-style', get_stylesheet_uri(), array(),'1343' );
 
 	wp_enqueue_script( 'yearn-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
@@ -251,11 +251,14 @@ add_filter( 'excerpt_length', 'yearn_excerpt_length', 999 );
 /**
  * Web Fonts and Icons
  */
-add_action( 'wp_enqueue_scripts', 'yearn_fonts_enqueue', 15 );
-function yearn_fonts_enqueue() {
-	wp_enqueue_style('lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,900');
-	wp_enqueue_style('opensans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,700,700italic');
+if ( ! function_exists('yearn_fonts_enqueue')) {
+
+	function yearn_fonts_enqueue() {
+		wp_enqueue_style('lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+		wp_enqueue_style('opensans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,700,700italic');
+	}
 }
+add_action( 'wp_enqueue_scripts', 'yearn_fonts_enqueue', 15 );
 
 /**
  * Find footer sidebar count to get appropriate width

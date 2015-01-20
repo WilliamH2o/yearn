@@ -11,8 +11,11 @@
 
 		</div><!-- .row -->
 	</div><!-- .site-content -->
-
-	<?php do_action( 'yearn_footer' ); ?>
+	<footer id="colophon" class="site-footer color-one" role="contentinfo">
+		<?php do_action( 'yearn_footer_begin' ); ?>
+		<?php do_action( 'yearn_footer' ); ?>
+		<?php do_action( 'yearn_footer_end' ); ?>
+	</footer><!-- #colophon -->
 
 </div><!-- #page -->
 

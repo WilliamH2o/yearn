@@ -12,19 +12,15 @@
  *
  * Outputs components to header#masthead
  *
- * Order:
- * div##yearn-top-bar > div.row > nav#top-bar-navigation > 'top' menu
- * div.top-bar-b > ( div.section-a > 'top-bar-section-a' sidebar ) + ( div.section-b > 'top-bar-section-b' sidebar )
- * div.site-header > div.site-branding + ( main-navigation > 'primary' menu )
- *
  * @see header.php
  */
 
 
 /**
+ * Top Bar
+ *
  * Outputs #yearn-top-bar and do_action( 'yearn_topbar' )
  */
-
 if ( ! function_exists( 'yearn_topbar' ) ) {
 	function yearn_topbar() {
 		if ( has_action( 'yearn_topbar' ) && '0' == get_theme_mod( 'yearn-topbar-display' ) ) { ?>
@@ -59,6 +55,8 @@ add_action( 'yearn_header', 'yearn_topbar', 10 );
 	add_action('yearn_topbar', 'yearn_topbar_sections');
 
 /**
+ * Stripe
+ *
  * Outputs #yearn-stripe and do_action( 'yearn_stripe' )
  */
 if ( ! function_exists( 'yearn_stripe' ) ) {
@@ -95,6 +93,8 @@ add_action( 'yearn_header', 'yearn_stripe', 20 );
 	add_action('yearn_stripe', 'yearn_stripe_sections');
 
 /**
+ * Header
+ *
  * Outputs #site-header and do_action( 'yearn_site_header' )
  */
 if ( ! function_exists( 'yearn_site_header' ) ) {
@@ -130,6 +130,78 @@ add_action( 'yearn_header', 'yearn_site_header', 40 );
 	add_action('yearn_site_header', 'yearn_header_sections');
 
 /**
+ * Footer
+ *
+ * Outputs #yearn-site-footer and do_action( 'yearn_site_footer' )
+ */
+if ( ! function_exists( 'yearn_site_footer' ) ) {
+	function yearn_site_footer() {
+		if ( has_action( 'yearn_site_footer' ) && '0' == get_theme_mod( 'yearn-footer-display' ) ) { ?>
+
+			<div id="yearn-site-footer">
+				<div class="row middle">
+					<?php do_action( 'yearn_site_footer' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_footer', 'yearn_site_footer', 10 );
+
+/**
+ * Creates yearn-footer-sections widgets
+ */
+function yearn_register_site_footer_widgets() {
+	yearn_init_widgets('yearn-footer-sections', 'site-footer', __('Footer', 'yearn') );
+}
+add_action( 'after_setup_theme', 'yearn_register_site_footer_widgets' );
+
+/**
+ * Outputs yearn-footer-sections
+ */
+function yearn_site_footer_sections() {
+	yearn_customize_sections( 'yearn-footer-sections', 'site-footer' );
+}
+add_action('yearn_site_footer', 'yearn_site_footer_sections');
+
+/**
+ * Bottom Bar
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_bottombar' ) ) {
+	function yearn_bottombar() {
+		if ( has_action( 'yearn_bottombar' ) && '0' == get_theme_mod( 'yearn-bottombar-display' ) ) { ?>
+
+			<div id="yearn-bottom-bar">
+				<div class="row middle">
+					<?php do_action( 'yearn_bottombar' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_footer', 'yearn_bottombar', 10 );
+
+/**
+ * Creates yearn-bottombar-sections widgets
+ */
+function yearn_register_bottombar_widgets() {
+	yearn_init_widgets('yearn-bottombar-sections', 'bottombar', __('Bottom bar', 'yearn') );
+}
+add_action( 'after_setup_theme', 'yearn_register_bottombar_widgets' );
+
+/**
+ * Outputs yearn-bottombar-sections
+ */
+function yearn_bottombar_sections() {
+	yearn_customize_sections( 'yearn-bottombar-sections', 'bottombar' );
+}
+add_action('yearn_bottombar', 'yearn_bottombar_sections');
+
+/**
  * yearn_customize_sections()
  *
  * Outputs logo and dynamic_sidebar based on Customizer Layout settings
@@ -141,7 +213,7 @@ if ( ! function_exists( 'yearn_customize_sections' ) ) {
 	function yearn_customize_sections( $theme_mod_id, $for ){
 
 		$sections = get_theme_mod( $theme_mod_id );
-
+//		echo $sections;
 		if ( 'none' != $sections ) {
 
 			// sections logo, small_widget, medium_widget, large_widget, full_widget
@@ -269,130 +341,12 @@ if ( ! function_exists( 'yearn_site_navigation' ) ) {
 }
 
 /**
- * do_action( 'yearn_footer' );
- *
- * Outputs:
- * footer#colophon > div.row > do_action( 'yearn_footer_begin' ) + ( div.row
- * > ( div.footer-first > do_action( 'yearn_footer_first' ) > dynamic_sidebar( 'footer-first' ) )
- * + ( div.footer-second > do_action( 'yearn_footer_second' ) > dynamic_sidebar( 'footer-second' ) )
- * + ( div.footer-third > do_action( 'yearn_footer_third' ) > dynamic_sidebar( 'footer-third' ) ) )
- * + do_action( 'yearn_footer_end' )
- *
- * @see footer.php
- */
-
-/**
- * Outputs footer#colophon with components
- *
- * footer#colophon > div.row > do_action( 'yearn_footer_begin' ) + ( div.row
- * > ( div.footer-first > do_action( 'yearn_footer_first' ) )
- * + ( div.footer-second > do_action( 'yearn_footer_second' ) )
- * + ( div.footer-third > do_action( 'yearn_footer_third' ) )
- * + do_action( 'yearn_footer_end' )
- */
-if ( ! function_exists( 'yearn_footer' ) ) {
-	function yearn_footer() { ?>
-
-			<footer id="colophon" class="site-footer color-one" role="contentinfo">
-				<div class="row ">
-
-					<?php do_action( 'yearn_footer_begin' ); ?>
-
-					<div class="row <?php echo yearn_footer_width(); ?>">
-
-
-					<?php if ( has_action( 'yearn_footer_first' ) ) { ?>
-						<div class="footer-first col">
-							<?php do_action( 'yearn_footer_first' ); ?>
-						</div>
-					<?php } ?>
-
-					<?php if ( has_action( 'yearn_footer_second' ) ) { ?>
-						<div class="footer-second col">
-							<?php do_action( 'yearn_footer_second' ); ?>
-						</div>
-					<?php } ?>
-
-					<?php if ( has_action( 'yearn_footer_third' ) ) { ?>
-						<div class="footer-third col">
-							<?php do_action( 'yearn_footer_third' ); ?>
-						</div>
-					<?php } ?>
-
-					</div>
-
-					<?php do_action( 'yearn_footer_end' ); ?>
-
-				</div>
-			</footer><!-- #colophon -->
-
-	<?php }
-}
-add_action( 'yearn_footer', 'yearn_footer', 10 );
-
-/**
- * Outputs dynamic_sidebar( 'footer-first' )
- *
- * Hooked to 'yearn_footer_first' via yearn_call_actions()
- */
-if ( ! function_exists( 'yearn_footer_first_widgets' ) ) {
-	function yearn_footer_first_widgets() { ?>
-
-		<?php dynamic_sidebar( 'footer-first' ); ?>
-
-	<?php }
-}
-
-/**
- * Outputs dynamic_sidebar( 'footer-second' )
- *
- * Hooked to 'yearn_footer_second' via yearn_call_actions()
- */
-if ( ! function_exists( 'yearn_footer_second_widgets' ) ) {
-	function yearn_footer_second_widgets() { ?>
-
-		<?php dynamic_sidebar( 'footer-second' ); ?>
-
-	<?php }
-}
-
-/**
- * Outputs dynamic_sidebar( 'footer-third' )
- *
- * Hooked to 'yearn_footer_third' via yearn_call_actions()
- */
-if ( ! function_exists( 'yearn_footer_third_widgets' ) ) {
-	function yearn_footer_third_widgets() { ?>
-
-		<?php dynamic_sidebar( 'footer-third' );
-
-	}
-}
-
-
-
-/**
  *
  * Various add_action() called after_setup_theme
  *
  */
 function yearn_call_actions() {
 
-//	if ( has_nav_menu( 'primary') ) {
-//		add_action( 'yearn_site_header', 'yearn_site_navigation', 20 );
-//	}
-
-	if ( is_active_sidebar( 'footer-first' ) ) {
-		add_action( 'yearn_footer_first', 'yearn_footer_first_widgets', 10 );
-	}
-
-	if ( is_active_sidebar( 'footer-second' ) ) {
-		add_action( 'yearn_footer_second', 'yearn_footer_second_widgets', 10 );
-	}
-
-	if ( is_active_sidebar( 'footer-third' ) ) {
-		add_action( 'yearn_footer_third', 'yearn_footer_third_widgets', 10 );
-	}
 
 }
 

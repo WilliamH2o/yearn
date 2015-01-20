@@ -797,36 +797,44 @@ and Blueprint http://www.blueprintcss.org/
     *
     */
 	.hmenu,
-	.top-bar .widget_nav_menu {
+	#masthead .widget_nav_menu,
+	#yearn-bottom-bar .widget_nav_menu {
 		position: relative;
 		padding-left: 0;
 		padding-right: 0;
 	}
 
+	#yearn-top-bar .widget:last-of-type { float: right;}
+
 	.hmenu ul,
-	.top-bar .widget_nav_menu ul {
+	#masthead .widget_nav_menu ul,
+	#yearn-bottom-bar .widget_nav_menu ul {
 		margin: 0;
 		list-style: none;
 	}
 
 	.hmenu li,
-	.top-bar .widget_nav_menu li {
+	#masthead .widget_nav_menu li,
+	#yearn-bottom-bar .widget_nav_menu li {
 		position: relative;
 		float: left;
 	}
 
 	.hmenu a,
-	.top-bar .widget_nav_menu a {
+	#masthead .widget_nav_menu a,
+	#yearn-bottom-bar .widget_nav_menu a {
 		display: block;
 		padding: 1em;
 		text-decoration: none;
 	}
 
 	.top-bar:first-of-type .hmenu a {
+		outline: 1px solid red;
 		display: inline-block
 	}
 
 	.top-bar:first-of-type .hmenu ul ul span {
+		outline: 1px solid red;
 		display: none
 	}
 
@@ -835,7 +843,8 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	.hmenu ul ul,
-	.top-bar .widget_nav_menu ul ul {
+	#masthead .widget_nav_menu ul ul,
+	#yearn-bottom-bar .widget_nav_menu ul ul {
 		position: absolute;
 		left: 0;
 		z-index: 99999;
@@ -845,40 +854,44 @@ and Blueprint http://www.blueprintcss.org/
 		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 	}
 
-	/*.hmenu ul ul li:nth-child(even),*/
-	/*.top-bar .widget_nav_menu ul ul li:nth-child(even) { background-color: rgba(255,255,255,.1) }*/
 	.hmenu ul ul ul,
-	.top-bar .widget_nav_menu ul ul ul {
+	#masthead .widget_nav_menu ul ul ul,
+	#yearn-bottom-bar .widget_nav_menu ul ul ul {
 		top: 0;
 		left: 100%;
 	}
 
 	.hmenu ul ul ul ul,
-	.top-bar .widget_nav_menu ul ul ul ul {
+	#masthead .widget_nav_menu ul ul ul ul,
+	#yearn-bottom-bar .widget_nav_menu ul ul ul ul {
 		/* For menus with excessive depth, let's not push the .sub-menu out the full 100%(225px) */
 		top: 100%;
 		left: 30%;
 	}
 
 	.hmenu ul ul a,
-	.top-bar .widget_nav_menu ul ul a {
+	#masthead .widget_nav_menu ul ul a,
+	#yearn-bottom-bar .widget_nav_menu ul ul a {
 		width: 225px;
 	}
 
 
-	.hmenu li > a:hover {
+	.hmenu li > a:hover
+	#masthead .widget_nav_menu li > a:hover,
+	#yearn-bottom-bar .widget_nav_menu li > a:hover {
 		background-color: rgba(0, 0, 0, .2);
 		text-decoration: none;
 	}
 
-	a:not([href]):hover,
-	.widget li a:not([href]):hover,
-	.hmenu li > a:not([href]):hover {
+	a:not([href]):hover/*,
+	*//*.widget li a:not([href]):hover,
+	.hmenu li > a:not([href]):hover*/ {
 		background-color: inherit
 	}
 
 	.hmenu ul li:hover > ul,
-	.top-bar .widget_nav_menu ul li:hover > ul {
+	#masthead .widget_nav_menu ul li:hover > ul,
+	#yearn-bottom-bar .widget_nav_menu ul li:hover > ul {
 		display: block;
 	}
 
@@ -892,6 +905,7 @@ and Blueprint http://www.blueprintcss.org/
 	#yearn-top-bar .current-menu-item > a,
 	#yearn-top-bar .current-menu-ancestor > a {
 		background-color: inherit;
+		outline: 1px solid red;
 	}
 
 	.sf-with-ul::after {
@@ -1589,9 +1603,8 @@ and Blueprint http://www.blueprintcss.org/
 
 	/*.top-bar [class*=col]+[class*=col]:last-child { float: none }*/
 	/* Site Footer Widgets */
-	.site-footer .widget {
-		background-color: rgba(0, 0, 0, .1);;
-		/*border: 1px solid rgba(255,255,255,.2);*/
+	#yearn-site-footer .widget {
+		background-color: rgba(0, 0, 0, .1);
 	}
 
 	.site-footer .widget li a:hover {
@@ -1786,26 +1799,14 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	/* site-footer */
-	.site-footer {
+	#colophon {
 		font-size: .764rem;
 		padding-top: 1.85em;
 		padding-bottom: 1.85em;
 		border-top: 1px solid rgba(0, 0, 0, .2);
 	}
 
-	.footer-two div.col {
-		-webkit-flex-basis: 50%;
-		-ms-flex-preferred-size: 50%;
-		flex-basis: 50%;
-		max-width: 50%;
-	}
-
-	.footer-three div.col {
-		-webkit-flex-basis: 33%;
-		-ms-flex-preferred-size: 33%;
-		flex-basis: 33%;
-		max-width: 33%;
-	}
+	#yearn-bottom-bar .col:last-of-type .widget { text-align: right; }
 }
 
 /***************************************************************

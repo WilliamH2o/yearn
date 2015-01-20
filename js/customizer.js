@@ -19,54 +19,249 @@
 		} );
 	} );
 
-	// yearn-topbar-borders
-	//wp.customize( 'yearn-topbar-borders', function( value ) {
-	//	value.bind( function( to ) {
-	//		if ( false === to ) {
-	//			$( '#yearn-top-bar' ).css(
-	//				'border-width','1px'
-	//			);
-	//		} else {
-	//			$( '#yearn-top-bar' ).css(
-	//				'border-width', '0px'
-	//			);
-	//		}
-	//	});
-	//});
+	// Colors
 
-	// yearn-stripe-borders
-	wp.customize( 'yearn-topbar-borders', function( value ) {
+	// Site
+
+	// yearn-colors-site-background
+	wp.customize( 'yearn-colors-site-background', function( value ) {
 		value.bind( function( to ) {
 			if ( false === to ) {
-				$( '#stripe' ).css(
-					'border-width','1px'
+				$( 'body' ).css(
+					'background-color', 'inherit'
 				);
 			} else {
-				$( '#stripe' ).css(
-					'border-width', '0px'
+				$( 'body' ).css(
+					'background-color', to
 				);
 			}
 		});
 	});
 
-	// yearn_top_bar_foreground
-	wp.customize( 'yearn_top_bar_foreground', function( value ) {
+	// yearn-colors-site-text
+	wp.customize( 'yearn-colors-site-text', function( value ) {
 		value.bind( function( to ) {
-			//if ( false === to ) {
-            //
-			//	$( '#top-bar' ).css(
-			//		'color','inherit'
-			//	);
-            //
-			//} else {
-
-			$( '#yearn-top-bar' ).css(
-				'color', to
-			);
-
-			//}
+			if ( false === to ) {
+				$( 'body' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( 'body' ).css(
+					'color', to
+				);
+			}
 		});
 	});
+
+	// yearn-colors-site-links
+	wp.customize( 'yearn-colors-site-links', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( 'a' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( 'a' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-site-content_background
+	wp.customize( 'yearn-colors-site-content_background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#primary' ).css(
+					'background-color', 'inherit'
+				);
+			} else {
+				$( '#primary' ).css(
+					'background-color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-site-title_background
+	wp.customize( 'yearn-colors-site-title_background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '.entry-title' ).css(
+					'background-color', 'inherit'
+				);
+			} else {
+				$( '.entry-title' ).css(
+					'background-color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-site-title_text
+	wp.customize( 'yearn-colors-site-title_text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '.entry-title' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '.entry-title' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// Top Bar
+
+	// yearn-colors-topbar-background
+	wp.customize( 'yearn-colors-topbar-background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-top-bar' ).css(
+					'background', 'inherit'
+				);
+			} else {
+				$( '#yearn-top-bar' ).css(
+					'background', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-topbar-text
+	wp.customize( 'yearn-colors-topbar-text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-top-bar' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-top-bar' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-topbar-links
+	wp.customize( 'yearn-colors-topbar-links', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-top-bar a' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-top-bar a' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// footer
+
+	// yearn-colors-footer-background
+	wp.customize( 'yearn-colors-footer-background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-site-footer' ).css(
+					'background', 'inherit'
+				);
+			} else {
+				$( '#yearn-site-footer' ).css(
+					'background', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-footer-text
+	wp.customize( 'yearn-colors-footer-text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-site-footer' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-site-footer' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-footer-links
+	wp.customize( 'yearn-colors-footer-links', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-site-footer a' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-site-footer a' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// bottombar
+
+	// yearn-colors-bottombar-background
+	wp.customize( 'yearn-colors-bottombar-background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-bottom-bar' ).css(
+					'background-color', 'inherit'
+				);
+			} else {
+				$( '#yearn-bottom-bar' ).css(
+					'background-color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-bottombar-text
+	wp.customize( 'yearn-colors-bottombar-text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-bottom-bar' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-bottom-bar' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-bottombar-links
+	wp.customize( 'yearn-colors-bottombar-links', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-bottom-bar a' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-bottom-bar a' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+
+	//wp.customize( 'yearn-colors-topbar-background', function( value ) {
+	//	value.bind( function( to ) {
+	//		$( '#yearn-top-bar' ).css(
+	//			'background-color', to
+	//		);
+	//	});
+	//});
 
 	wp.customize( 'yearn_color_one_background', function( value ) {
 		value.bind( function( to ) {
