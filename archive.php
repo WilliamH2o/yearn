@@ -20,10 +20,12 @@ get_header(); ?>
 				<h1 class="page-title color-two">
 					<?php
 						if ( is_category() ) :
-							single_cat_title();
+
+							printf( __( 'Category: %s', 'yearn' ), '<span>' . single_cat_title( '', false ) . '</span>' );
 
 						elseif ( is_tag() ) :
-							single_tag_title();
+
+							printf( __( 'Tag: %s', 'yearn' ), '<span>' . single_tag_title( '', false ) . '</span>' );
 
 						elseif ( is_author() ) :
 							printf( __( 'Author: %s', 'yearn' ), '<span class="vcard">' . get_the_author() . '</span>' );

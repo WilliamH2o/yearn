@@ -202,6 +202,44 @@ function yearn_bottombar_sections() {
 add_action('yearn_bottombar', 'yearn_bottombar_sections');
 
 /**
+ * HOme Page Top
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_home_page_top_content' ) ) {
+	function yearn_home_page_top_content() {
+		if ( has_action( 'yearn_home_page_top_content' ) /*&& '0' == get_theme_mod( 'yearn-bottombar-display' )*/ ) { ?>
+
+
+
+			<div id="yearn_home_page_top" class="<?php echo ( '1' == get_theme_mod( 'yearn-home_page_top-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_home_page_top_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_home_page_top', 'yearn_home_page_top_content', 10 );
+
+/**
+ * Creates yearn-bottombar-sections widgets
+ */
+function yearn_register_home_page_top_widgets() {
+	yearn_init_widgets('yearn-home_page_top-sections', 'home_page_top', __('Home Page Top', 'yearn') );
+}
+add_action( 'after_setup_theme', 'yearn_register_home_page_top_widgets' );
+
+/**
+ * Outputs yearn-bottombar-sections
+ */
+function yearn_home_page_top_sections() {
+	yearn_customize_sections( 'yearn-home_page_top-sections', 'home_page_top' );
+}
+add_action('yearn_home_page_top_content', 'yearn_home_page_top_sections');
+
+/**
  * yearn_customize_sections()
  *
  * Outputs logo and dynamic_sidebar based on Customizer Layout settings

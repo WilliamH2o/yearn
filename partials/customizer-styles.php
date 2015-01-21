@@ -19,19 +19,38 @@
 	body {
 		background-color: <?php echo get_theme_mod( 'yearn-colors-site-background' ); ?>;
 		background-image: url("<?php echo get_theme_mod( 'yearn-colors-site-background_image' ); ?>");
-
 	}
+
 	body, button, input, select, textarea { color: <?php echo get_theme_mod( 'yearn-colors-site-text' ); ?> ; }
 
 	a { color: <?php echo get_theme_mod( 'yearn-colors-site-links' ); ?>; }
 	/*a:visited {	color: #3f00bd; }*/
 
-	.entry-title {
-		background-color: <?php echo get_theme_mod( 'yearn-colors-site-title_background' ); ?>;
-		color: <?php echo get_theme_mod( 'yearn-colors-site-title_text' ); ?>;
+	h1.entry-title,
+	.page-title,
+	.entry-meta {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-content-title_background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-content-title_text' ); ?>;
 	}
 
+	h3.entry-title {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-archives-title_background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-archives-title_text' ); ?>;
+	}
+
+	h3.entry-title a {color: <?php echo get_theme_mod( 'yearn-colors-archives-title_text' ); ?>;}
+
+	.entry-meta a { color: <?php echo get_theme_mod( 'yearn-colors-content-title_text' ); ?>; }
+
+	h3.entry-title { background-color: <?php echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -10) ?>;}
+
+	.entry-date { background-color: <?php echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -5) ?>;}
+
+	.entry-excerpt { background-color: <?php echo get_theme_mod( 'yearn-colors-archives-content_background' ) ?>;}
+
 	#primary { background-color: <?php echo get_theme_mod( 'yearn-colors-site-content_background' ); ?>; }
+
+	#secondary { background-color: <?php echo get_theme_mod( 'yearn-colors-site-sidebar_background' ); ?>; }
 
 	#yearn-top-bar {
 		background-color: <?php echo get_theme_mod( 'yearn-colors-topbar-background' ); ?>;
@@ -41,6 +60,18 @@
 	#yearn-top-bar a {
 		color: <?php echo get_theme_mod( 'yearn-colors-topbar-links' ); ?>;
 	}
+
+	.edit-link a,
+	.nav-links a,
+	button,
+	.button,
+	input[type="button"],
+	input[type="reset"],
+	input[type="submit"] {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-content-button-background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-content-button-text' ); ?>;
+	}
+
 
 	#yearn-site-footer {
 		background-color: <?php echo get_theme_mod( 'yearn-colors-footer-background' ); ?>;
@@ -60,52 +91,11 @@
 		color: <?php echo get_theme_mod( 'yearn-colors-bottombar-links' ); ?>;
 	}
 
-	.color-one,
-	#secondary .widget:nth-child(even){
-		background-color: <?php echo $color_one_bg ?>;
-		color: <?php echo $color_one_fg ?>;
-	}
-	.color-one-fg,
-	.color-one a,
-	a.color-one { color: <?php echo $color_one_fg ?>;}
-
-	.color-one-bg { background-color: <?php echo $color_one_bg ?>;}
-
-
-	.color-two,
-	#secondary .widget:nth-child(odd),
-	.top-bar .sub-menu	{
-		background-color: <?php echo $color_two_bg ?>;
-		color: <?php echo $color_two_fg ?>;
-	}
-	.color-two-fg,
-	.color-two a { color: <?php echo $color_two_fg ?>;}
-	.color-two-bg { background-color: <?php echo $color_two_bg ?>;}
-
 	/* Style the widget placeholder text*/
 	.widget ::-webkit-input-placeholder { color: <?php echo $color_two_fg ?>; opacity: .5 }
 	.widget :-moz-placeholder { color: color: <?php echo $color_two_fg ?>; opacity: .5 }
 	.widget ::-moz-placeholder { color: color: <?php echo $color_two_fg ?>; opacity: .5 }
 	.widget :-ms-input-placeholder { color: color: <?php echo $color_two_fg ?>; opacity: .5 }
-
-
-
-	#content .main { background-color:  <?php echo get_theme_mod( 'yearn_content_background' ); ?>;	}
-
-	.hmenu ul ul,
-	button,
-	.button,
-	input[type="button"],
-	input[type="reset"],
-	input[type="submit"] {
-		background-color: #4f4a59; color:#ffffff;
-	}
-
-	button:hover, .button:hover, input[type="button"]:hover, input[type="reset"]:hover,	input[type="submit"]:hover {
-		background-color: <?php echo shadeColor( '#4f4a59', -5); ?>;
-	}
-
-	/*.entry-date { background-color:*/<?php //echo shadeColor( '#4f4a59', 10); ?>/*; }*/
 
 	/*.entry-meta,*/
 	/*.entry-meta a { color: */<?php //echo shadeColor( '#fff', 40); ?>/* }*/

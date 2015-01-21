@@ -11,7 +11,10 @@
 		<?php if ( has_post_thumbnail() ) { 
 			the_post_thumbnail();
 		} ?>
-		<?php the_title( '<h1 class="entry-title color-two">', '</h1>' ); ?>
+
+		<?php if ( ! is_front_page() || '1' == get_theme_mod( 'yearn-home_page_title' ) ) {
+			the_title( '<h1 class="entry-title color-two">', '</h1>' );
+		} ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">

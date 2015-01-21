@@ -21,7 +21,7 @@ get_header(); ?>
 			<?php if ( have_posts() ) : ?>
 
 				<header class="page-header">
-					<h1 class="page-title color-two"><?php
+					<h1 class="page-title"><?php
 						$post = $wp_query->get_queried_object();
 						$pagename = $post->post_title;
 						echo $pagename ;

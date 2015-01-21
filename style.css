@@ -690,6 +690,12 @@ and Blueprint http://www.blueprintcss.org/
 		border-radius: 8px;
 	}
 
+	button:hover,
+	.button:hover,
+	input[type="button"]:hover,
+	input[type="reset"]:hover,
+	input[type="submit"]:hover { opacity: .9; }
+
 	.button {
 		display: inline-block;
 		-webkit-appearance: inherit;
@@ -905,7 +911,6 @@ and Blueprint http://www.blueprintcss.org/
 	#yearn-top-bar .current-menu-item > a,
 	#yearn-top-bar .current-menu-ancestor > a {
 		background-color: inherit;
-		outline: 1px solid red;
 	}
 
 	.sf-with-ul::after {
@@ -1214,9 +1219,9 @@ and Blueprint http://www.blueprintcss.org/
 			margin-top: 1em;
 		}
 
-		#masthead .widget {
+		#masthead .widget,
+		#main .widget {
 			border-width: 0;
-			/*cle*/
 		}
 	}
 
@@ -1717,12 +1722,12 @@ and Blueprint http://www.blueprintcss.org/
 
 	#primary {
 		padding-left: 1.4em;
-		padding-right: .7em;
+		padding-right: 1.4em;
 	}
 
-	#primary {
-		padding-left: 1.4em;
-		padding-right: 1.4em;
+	.fill-horizontally {
+		margin-left: -1.4em;
+		margin-right: -1.4em;
 	}
 
 	#content.full .entry-content {
@@ -1753,10 +1758,8 @@ and Blueprint http://www.blueprintcss.org/
 		box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
 	}
 
-	.entry-meta a,
-	.entry-meta [data-icon] {
-		opacity: .6
-	}
+	.entry-meta a:before,
+	.entry-meta time:before{ opacity: .6; }
 
 	.entry-date a {
 		opacity: 1;
@@ -2312,7 +2315,7 @@ and Blueprint http://www.blueprintcss.org/
 		display: block;
 	}
 
-	.edit-link,
+	.edit-link a,
 	.page-links a,
 	.nav-links a,
 	.nav-previous a,
@@ -2332,9 +2335,9 @@ and Blueprint http://www.blueprintcss.org/
 	.nav-links a:hover,
 	.wp-pagenavi a:hover,
 	.post-edit-link:hover {
-		background-color: rgba(255, 255, 255, .9);
 		text-decoration: none;
-		border-color: rgba(0, 0, 0, .3);
+		opacity: .9;
+
 	}
 
 	.wp-pagenavi {
