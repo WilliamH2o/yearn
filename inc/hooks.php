@@ -79,10 +79,13 @@ add_action( 'yearn_header', 'yearn_stripe', 20 );
 	/**
 	 * Does yearn_init_widgets for stripe
 	 */
-	function yearn_register_stripe_widgets() {
-		yearn_init_widgets('yearn-stripe-sections', 'stripe', __('Stripe', 'yearn') );
+if ( ! function_exists( 'yearn_register_stripe_widgets' ) ) {
+	function yearn_register_stripe_widgets()
+	{
+		yearn_init_widgets('yearn-stripe-sections', 'stripe', __('Stripe', 'yearn'));
 	}
-	add_action( 'after_setup_theme', 'yearn_register_stripe_widgets' );
+}
+	add_action('after_setup_theme', 'yearn_register_stripe_widgets', 10);
 
 	/**
 	 * Does yearn_customize_sections for stripe
@@ -90,7 +93,7 @@ add_action( 'yearn_header', 'yearn_stripe', 20 );
 	function yearn_stripe_sections() {
 		yearn_customize_sections( 'yearn-stripe-sections', 'stripe' );
 	}
-	add_action('yearn_stripe', 'yearn_stripe_sections');
+	add_action('yearn_stripe', 'yearn_stripe_sections', 10);
 
 /**
  * Header
@@ -202,15 +205,13 @@ function yearn_bottombar_sections() {
 add_action('yearn_bottombar', 'yearn_bottombar_sections');
 
 /**
- * HOme Page Top
+ * Home Page Top
  *
  * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
  */
 if ( ! function_exists( 'yearn_home_page_top_content' ) ) {
 	function yearn_home_page_top_content() {
-		if ( has_action( 'yearn_home_page_top_content' ) /*&& '0' == get_theme_mod( 'yearn-bottombar-display' )*/ ) { ?>
-
-
+		if ( has_action( 'yearn_home_page_top_content' ) ) { ?>
 
 			<div id="yearn_home_page_top" class="<?php echo ( '1' == get_theme_mod( 'yearn-home_page_top-padding' ) ? 'fill-horizontally' : '') ?>">
 				<div class="row middle">

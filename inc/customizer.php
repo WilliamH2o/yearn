@@ -134,7 +134,7 @@ if ( ! function_exists('yearn_customize_layout_topbar') ) {
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-topbar-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-topbar');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-topbar-sections', 'full', 'refresh', __('Sections', 'yearn'), 'yearn-layout-topbar', array(
+		yearn_customize_setting_select($wp_customize, 'yearn-topbar-sections', 'logo-large_widget', 'refresh', __('Sections', 'yearn'), 'yearn-layout-topbar', array(
 			'none' => __('None', 'yearn'),
 			'full_widget' => __('1 Full Widget', 'yearn'),
 			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
@@ -160,7 +160,7 @@ if ( ! function_exists('yearn_customize_layout_stripe') ) {
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-stripe-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-stripe');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-stripe-sections', 'one_large-one_small', 'refresh', __('Sections', 'yearn'), 'yearn-layout-stripe', array(
+		yearn_customize_setting_select($wp_customize, 'yearn-stripe-sections', 'large_widget-small_widget', 'refresh', __('Sections', 'yearn'), 'yearn-layout-stripe', array(
 			'none' => __('None', 'yearn'),
 			'full_widget' => __('1 Full Widget', 'yearn'),
 			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
@@ -186,7 +186,7 @@ if ( ! function_exists('yearn_customize_layout_header') ) {
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-header-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-header');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-header-sections', 'logo_full-menu', 'refresh', __('Sections', 'yearn'), 'yearn-layout-header', array(
+		yearn_customize_setting_select($wp_customize, 'yearn-header-sections', 'menu', 'refresh', __('Sections', 'yearn'), 'yearn-layout-header', array(
 			'none' => __('None', 'yearn'),
 			'logo_full' => __('Logo', 'yearn'),
 			'menu' => __('Primary Menu', 'yearn'),
