@@ -9,10 +9,10 @@
  * Add postMessage support for site title and description for the Theme Customizer.
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
- * todo figure out how to handle menus. would like to hide container when menu isn't selected.
- * todo conditionals if menu not selected, don't show setting
  *
- * todo: layout is for layout, not colors. need to create an outline
+ * todo need themes : is theme A is set change defaults
+ * todo reset button
+ *
  */
 
 function yearn_customize_register( $wp_customize ) {
@@ -83,15 +83,16 @@ function yearn_customize_register( $wp_customize ) {
 	yearn_customize_colors( $wp_customize );
 
 }
-add_action( 'customize_register', 'yearn_customize_register' );
+add_action( 'customize_register', 'yearn_customize_register', 50 );
 
 /**
  * Layout
  */
 if ( ! function_exists('yearn_customize_layout') ) {
-
-	function yearn_customize_layout( $wp_customize )
-	{
+	function yearn_customize_layout( $wp_customize ) {
+		if ( has_filter('yearn_remove','layout' ) ) {
+			return;
+		}
 		// Layout Panel
 		yearn_customize_panel( $wp_customize, 'yearn-layout', __('Layout', 'yearn') );
 
@@ -127,8 +128,12 @@ if ( ! function_exists('yearn_customize_layout') ) {
 
 // Layout - Top Bar
 if ( ! function_exists('yearn_customize_layout_topbar') ) {
-	function yearn_customize_layout_topbar($wp_customize)
-	{
+	function yearn_customize_layout_topbar($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','topbar' ) ) {
+			return;
+		}
+
 		// Top Bar Layout
 		yearn_customize_section($wp_customize, 'yearn-layout-topbar', __('Top Bar', 'yearn'), 'yearn-layout');
 
@@ -156,6 +161,10 @@ if ( ! function_exists('yearn_customize_layout_topbar') ) {
 if ( ! function_exists('yearn_customize_layout_stripe') ) {
 	function yearn_customize_layout_stripe($wp_customize) {
 
+		if ( has_filter( 'yearn_remove','stripe' ) ) {
+			return;
+		}
+
 		yearn_customize_section($wp_customize, 'yearn-layout-stripe', __('Stripe', 'yearn'), 'yearn-layout');
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-stripe-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-stripe');
@@ -182,6 +191,10 @@ if ( ! function_exists('yearn_customize_layout_stripe') ) {
 if ( ! function_exists('yearn_customize_layout_header') ) {
 	function yearn_customize_layout_header($wp_customize) {
 
+		if ( has_filter( 'yearn_remove','header' ) ) {
+			return;
+		}
+
 		yearn_customize_section($wp_customize, 'yearn-layout-header', __('Header', 'yearn'), 'yearn-layout');
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-header-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-header');
@@ -204,6 +217,10 @@ if ( ! function_exists('yearn_customize_layout_header') ) {
 // Layout - Home Page
 if ( ! function_exists('yearn_customize_layout_home_page') ) {
 	function yearn_customize_layout_home_page($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','home-page' ) ) {
+			return;
+		}
 
 		yearn_customize_section($wp_customize, 'yearn-layout-home_page', __('Home Page', 'yearn'), 'yearn-layout');
 
@@ -243,6 +260,10 @@ if ( ! function_exists('yearn_customize_layout_home_page') ) {
 if ( ! function_exists('yearn_customize_layout_pages') ) {
 	function yearn_customize_layout_pages($wp_customize) {
 
+		if ( has_filter( 'yearn_remove','pages' ) ) {
+			return;
+		}
+
 		yearn_customize_section($wp_customize, 'yearn-layout-pages', __('Pages', 'yearn'), 'yearn-layout');
 
 		yearn_customize_setting_select($wp_customize, 'yearn-pages-sections', 'two_column', 'refresh', __('Sections', 'yearn'), 'yearn-layout-pages', array(
@@ -259,6 +280,10 @@ if ( ! function_exists('yearn_customize_layout_pages') ) {
 if ( ! function_exists('yearn_customize_layout_posts') ) {
 	function yearn_customize_layout_posts($wp_customize) {
 
+		if ( has_filter( 'yearn_remove','posts' ) ) {
+			return;
+		}
+
 		yearn_customize_section($wp_customize, 'yearn-layout-posts', __('Posts', 'yearn'), 'yearn-layout');
 
 		yearn_customize_setting_select($wp_customize, 'yearn-posts-sections', 'two_column', 'refresh', __('Sections', 'yearn'), 'yearn-layout-posts', array(
@@ -274,6 +299,10 @@ if ( ! function_exists('yearn_customize_layout_posts') ) {
 if ( ! function_exists('yearn_customize_layout_archives') ) {
 	function yearn_customize_layout_archives($wp_customize) {
 
+		if ( has_filter( 'yearn_remove','archives' ) ) {
+			return;
+		}
+
 		yearn_customize_section($wp_customize, 'yearn-layout-archives', __('Archives', 'yearn'), 'yearn-layout');
 
 		yearn_customize_setting_select($wp_customize, 'yearn-archives-sections', 'two_column', 'refresh', __('Sections', 'yearn'), 'yearn-layout-archives', array(
@@ -287,6 +316,10 @@ if ( ! function_exists('yearn_customize_layout_archives') ) {
 // Layout - Footer
 if ( ! function_exists('yearn_customize_layout_footer') ) {
 	function yearn_customize_layout_footer($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','footer' ) ) {
+			return;
+		}
 
 		yearn_customize_section($wp_customize, 'yearn-layout-footer', __('Footer', 'yearn'), 'yearn-layout');
 
@@ -312,6 +345,10 @@ if ( ! function_exists('yearn_customize_layout_footer') ) {
 // Layout Bottom Bar
 if ( ! function_exists('yearn_customize_layout_bottombar') ) {
 	function yearn_customize_layout_bottombar($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','bottombar' ) ) {
+			return;
+		}
 
 		yearn_customize_section($wp_customize, 'yearn-layout-bottombar', __('Bottom Bar', 'yearn'), 'yearn-layout');
 
@@ -342,6 +379,10 @@ if ( ! function_exists('yearn_customize_layout_bottombar') ) {
 if ( ! function_exists('yearn_customize_colors') ) {
 	function yearn_customize_colors( $wp_customize ){
 
+		if ( has_filter( 'yearn_remove','color' ) ) {
+			return;
+		}
+
 		// Colors and Backgrounds Panel
 		yearn_customize_panel( $wp_customize, 'yearn-colors', __('Colors and Backgrounds', 'yearn') );
 
@@ -350,6 +391,12 @@ if ( ! function_exists('yearn_customize_colors') ) {
 
 		// Top Bar
 		yearn_customize_colors_topbar( $wp_customize );
+
+		// Stripe
+		yearn_customize_colors_stripe( $wp_customize );
+
+		// Header
+		yearn_customize_colors_header( $wp_customize );
 
 		// Content
 		yearn_customize_colors_content( $wp_customize );
@@ -372,7 +419,7 @@ if ( ! function_exists('yearn_customize_colors_site') ) {
 	{
 		yearn_customize_section($wp_customize, 'yearn-colors-site', __('Site', 'yearn'), 'yearn-colors');
 
-		yearn_customize_setting_color($wp_customize, 'yearn-colors-site-background', false, __('Background', 'yearn'), 'yearn-colors-site');
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-site-background', '#E6E6E6', __('Background', 'yearn'), 'yearn-colors-site');
 
 		yearn_customize_setting_image($wp_customize, 'yearn-colors-site-background_image', 'refresh', __('Background Image', 'yearn'), 'yearn-colors-site');
 
@@ -391,6 +438,10 @@ if ( ! function_exists('yearn_customize_colors_site') ) {
 if ( ! function_exists('yearn_customize_colors_topbar') ) {
 	function yearn_customize_colors_topbar($wp_customize) {
 
+		if ( has_filter( 'yearn_remove','topbar' ) ) {
+			return;
+		}
+
 		yearn_customize_section($wp_customize, 'yearn-colors-topbar', __('Top Bar', 'yearn'), 'yearn-colors');
 
 		yearn_customize_setting_color($wp_customize, 'yearn-colors-topbar-background', false, __('Background', 'yearn'), 'yearn-colors-topbar');
@@ -402,9 +453,51 @@ if ( ! function_exists('yearn_customize_colors_topbar') ) {
 	}
 }
 
+// Colors - Stripe
+if ( ! function_exists('yearn_customize_colors_stripe') ) {
+	function yearn_customize_colors_stripe($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','stripe' ) ) {
+			return;
+		}
+
+		yearn_customize_section($wp_customize, 'yearn-colors-stripe', __('Stripe', 'yearn'), 'yearn-colors');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-stripe-background', false, __('Background', 'yearn'), 'yearn-colors-stripe');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-stripe-text', false, __('Text', 'yearn'), 'yearn-colors-stripe');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-stripe-links', false, __('Links', 'yearn'), 'yearn-colors-stripe');
+
+	}
+}
+
+// Colors - Header
+if ( ! function_exists('yearn_customize_colors_header') ) {
+	function yearn_customize_colors_header($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','header' ) ) {
+			return;
+		}
+
+		yearn_customize_section($wp_customize, 'yearn-colors-header', __('Header', 'yearn'), 'yearn-colors');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-header-background', false, __('Background', 'yearn'), 'yearn-colors-header');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-header-text', false, __('Text', 'yearn'), 'yearn-colors-header');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-header-links', false, __('Links', 'yearn'), 'yearn-colors-header');
+
+	}
+}
+
 // Colors - Content
 if ( ! function_exists('yearn_customize_colors_content') ) {
 	function yearn_customize_colors_content($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','content' ) ) {
+			return;
+		}
 
 		yearn_customize_section($wp_customize, 'yearn-colors-content', __('Content', 'yearn'), 'yearn-colors');
 
@@ -423,6 +516,10 @@ if ( ! function_exists('yearn_customize_colors_content') ) {
 if ( ! function_exists('yearn_customize_colors_archives') ) {
 	function yearn_customize_colors_archives($wp_customize) {
 
+		if ( has_filter( 'yearn_remove','archives' ) ) {
+			return;
+		}
+
 		yearn_customize_section($wp_customize, 'yearn-colors-archives', __('Archives', 'yearn'), 'yearn-colors');
 
 		yearn_customize_setting_color($wp_customize, 'yearn-colors-archives-title_background', false, __('Entry Title Background', 'yearn'), 'yearn-colors-archives');
@@ -434,24 +531,13 @@ if ( ! function_exists('yearn_customize_colors_archives') ) {
 	}
 }
 
-// Colors - Content
-if ( ! function_exists('yearn_customize_colors_archives') ) {
-	function yearn_customize_colors_archives($wp_customize) {
-
-		yearn_customize_section($wp_customize, 'yearn-colors-archives', __('Archives', 'yearn'), 'yearn-colors');
-
-		yearn_customize_setting_color($wp_customize, 'yearn-colors-archives-meta-background', false, __('Meta Background', 'yearn'), 'yearn-colors-content');
-
-		yearn_customize_setting_color($wp_customize, 'yearn-colors-archives-meta-text', false, __('Meta Text', 'yearn'), 'yearn-colors-content');
-
-		// yearn_customize_setting_color($wp_customize, 'yearn-colors-content-links', false, __('Links', 'yearn'), 'yearn-colors-topbar');
-
-	}
-}
-
 // Colors - Footer
 if ( ! function_exists('yearn_customize_colors_footer') ) {
 	function yearn_customize_colors_footer($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','footer' ) ) {
+			return;
+		}
 
 		yearn_customize_section($wp_customize, 'yearn-colors-footer', __('Footer', 'yearn'), 'yearn-colors');
 
@@ -467,6 +553,10 @@ if ( ! function_exists('yearn_customize_colors_footer') ) {
 // Colors - Bottom Bar
 if ( ! function_exists('yearn_customize_colors_bottombar') ) {
 	function yearn_customize_colors_bottombar($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','bottombar' ) ) {
+			return;
+		}
 
 		yearn_customize_section($wp_customize, 'yearn-colors-bottombar', __('Bottom Bar', 'yearn'), 'yearn-colors');
 
@@ -663,13 +753,10 @@ function yearn_customize_setting_text( $wp_customize, $name, $section, $text ) {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function yearn_customize_preview_js() {
-	wp_enqueue_script( 'yearn_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '7927', true );
+	wp_enqueue_script( 'yearn_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '7627', true );
 }
 add_action( 'customize_preview_init', 'yearn_customize_preview_js' );
 
-/**
- * Extend
- */
 
 
 

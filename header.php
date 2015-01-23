@@ -64,6 +64,9 @@
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content <?php echo ( !is_active_sidebar( 'sidebar' ) ? 'full' : '' ); ?>">
-		<div class="row main">
+
+	<?php do_action('yearn_content_top');  ?>
+
+	<div class="row main">
 
 			<?php do_action( 'yearn_content_begin' ); ?>

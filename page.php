@@ -7,7 +7,11 @@
  * @package yearn
  */
 
-$yearn_content_columns = get_theme_mod( 'yearn-pages-sections' );
+if ( is_front_page() ) {
+	$yearn_content_columns = get_theme_mod( 'yearn-home_page-sections' );
+} else {
+	$yearn_content_columns = get_theme_mod( 'yearn-pages-sections' );
+}
 
 get_header(); ?>
 
@@ -17,6 +21,8 @@ get_header(); ?>
 			<?php if ( is_front_page() ) {
 				do_action('yearn_home_page_top');
 			} ?>
+
+			<?php do_action('yearn_page_top'); ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 

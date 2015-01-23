@@ -220,6 +220,100 @@
 		});
 	});
 
+	// Stripe
+
+	// yearn-colors-stripe-background
+	wp.customize( 'yearn-colors-stripe-background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-stripe' ).css(
+					'background', 'inherit'
+				);
+			} else {
+				$( '#yearn-stripe' ).css(
+					'background', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-topbar-text
+	wp.customize( 'yearn-colors-stripe-text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-stripe' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-stripe' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-topbar-links
+	wp.customize( 'yearn-colors-stripe-links', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-stripe a' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-stripe a' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// Header
+
+	// yearn-colors-header-background
+	wp.customize( 'yearn-colors-header-background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-site-header' ).css(
+					'background', 'inherit'
+				);
+			} else {
+				$( '#yearn-site-header' ).css(
+					'background', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-header-text
+	wp.customize( 'yearn-colors-header-text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-site-header' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-site-header' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-header-links
+	wp.customize( 'yearn-colors-header-links', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-site-header a' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-site-header a' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
 	// Content
 
 	// yearn-colors-content-buttons-background

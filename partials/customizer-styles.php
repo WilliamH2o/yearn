@@ -3,7 +3,7 @@
 
 	<?php
 
-	$body_bg = '';
+	$body_bg = get_theme_mod( 'yearn-colors-site-background' );
 	$body_fg = '';
 
 	$top_bar_fg = get_theme_mod( 'yearn_top_bar_foreground' );
@@ -17,8 +17,9 @@
 	?>
 
 	body {
-		background-color: <?php echo get_theme_mod( 'yearn-colors-site-background' ); ?>;
-		background-image: url("<?php echo get_theme_mod( 'yearn-colors-site-background_image' ); ?>");
+
+		background-color: <?php echo ( $body_bg ?  $body_bg : '#000000' ); ?>;
+		background-image: url("<?php  echo get_theme_mod( 'yearn-colors-site-background_image' ); ?>");
 	}
 
 	body, button, input, select, textarea { color: <?php echo get_theme_mod( 'yearn-colors-site-text' ); ?> ; }
@@ -42,7 +43,7 @@
 
 	.entry-meta a { color: <?php echo get_theme_mod( 'yearn-colors-content-title_text' ); ?>; }
 
-	h3.entry-title { background-color: <?php echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -10) ?>;}
+	h3.entry-title { background-color: <?php // echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -10) ?>;}
 
 	.entry-date { background-color: <?php echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -5) ?>;}
 
@@ -59,6 +60,24 @@
 
 	#yearn-top-bar a {
 		color: <?php echo get_theme_mod( 'yearn-colors-topbar-links' ); ?>;
+	}
+
+	#yearn-stripe {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-stripe-background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-stripe-text' ); ?>;
+	}
+
+	#yearn-stripe a {
+		color: <?php echo get_theme_mod( 'yearn-colors-stripe-links' ); ?>;
+	}
+
+	#yearn-site-header {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-header-background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-header-text' ); ?>;
+	}
+
+	#yearn-site-header a {
+		color: <?php echo get_theme_mod( 'yearn-colors-header-links' ); ?>;
 	}
 
 	.edit-link a,
