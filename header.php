@@ -59,14 +59,14 @@
 
 	<header id="masthead" class="color-one full" role="banner"><!--compact -->
 
-		<?php do_action( 'yearn_header' ); ?>
+		<?php do_action( 'yearn_masthead', 'masthead', '' ); ?>
 
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content <?php echo ( !is_active_sidebar( 'sidebar' ) ? 'full' : '' ); ?>">
 
-	<?php do_action('yearn_content_top');  ?>
+	<?php do_action('yearn_site_content_top', 'content', 'top');  ?>
 
 	<div class="row main">
 
-			<?php do_action( 'yearn_content_begin' ); ?>
+			<?php do_action( 'yearn_site_content_begin', 'content', 'begin' ); ?>

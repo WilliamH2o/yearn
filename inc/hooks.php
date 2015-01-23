@@ -8,7 +8,7 @@
  */
 
 /**
- * do_action( 'yearn_header' );
+ * do_action( 'yearn_masthead' );
  *
  * Outputs components to header#masthead
  *
@@ -36,7 +36,7 @@ if ( ! function_exists( 'yearn_topbar' ) ) {
 		<?php }
 	}
 }
-add_action( 'yearn_header', 'yearn_topbar', 10 );
+add_action( 'yearn_masthead', 'yearn_topbar', 30 );
 
 	/**
 	 * Does yearn_init_widgets for topbar
@@ -74,7 +74,7 @@ if ( ! function_exists( 'yearn_stripe' ) ) {
 		<?php }
 	}
 }
-add_action( 'yearn_header', 'yearn_stripe', 20 );
+add_action( 'yearn_masthead', 'yearn_stripe', 40 );
 
 	/**
 	 * Does yearn_init_widgets for stripe
@@ -114,7 +114,7 @@ if ( ! function_exists( 'yearn_site_header' ) ) {
 		<?php }
 	}
 }
-add_action( 'yearn_header', 'yearn_site_header', 40 );
+add_action( 'yearn_masthead', 'yearn_site_header', 50 );
 
 	/**
 	 * Does yearn_init_widgets for header
@@ -150,7 +150,7 @@ if ( ! function_exists( 'yearn_site_footer' ) ) {
 		<?php }
 	}
 }
-add_action( 'yearn_footer', 'yearn_site_footer', 10 );
+add_action( 'yearn_colophon', 'yearn_site_footer', 10 );
 
 /**
  * Creates yearn-footer-sections widgets
@@ -186,7 +186,7 @@ if ( ! function_exists( 'yearn_bottombar' ) ) {
 		<?php }
 	}
 }
-add_action( 'yearn_footer', 'yearn_bottombar', 10 );
+add_action( 'yearn_colophon', 'yearn_bottombar', 10 );
 
 /**
  * Creates yearn-bottombar-sections widgets
@@ -222,7 +222,7 @@ if ( ! function_exists( 'yearn_home_page_top_content' ) ) {
 		<?php }
 	}
 }
-add_action( 'yearn_home_page_top', 'yearn_home_page_top_content', 10 );
+add_action( 'yearn_home_page_primary_top', 'yearn_home_page_top_content', 10 );
 
 /**
  * Creates yearn-bottombar-sections widgets
@@ -380,13 +380,74 @@ if ( ! function_exists( 'yearn_site_navigation' ) ) {
 }
 
 /**
+ *	Excessive actions based on page type, HTML location, and its position
  *
- * Various add_action() called after_setup_theme
- *
+ * @param $location
+ * @param $position
  */
-function yearn_call_actions() {
+function yearn_theme_location_actions( $location, $position) {
 
+	if ( is_front_page() ) {
+		do_action('yearn_home_page_' . $location . '_' . $position);
+		// echo 'yearn_home_page_' . $location . '_' . $position;
+	} elseif ( is_home() ) {
+		do_action('yearn_blog_page_' . $location . '_' . $position);
+		// echo 'yearn_blog_page_' . $location . '_' . $position;
+	} elseif ( is_single() ) {
+		do_action('yearn_single_' . $location . '_' . $position);
+		// echo 'yearn_single_' . $location . '_' . $position;
+	} elseif ( is_search() ) {
+		do_action('yearn_search_' . $location . '_' . $position);
+		// echo 'yearn_search_' . $location . '_' . $position;
+	} elseif ( is_archive() ) {
+		do_action('yearn_archive_' . $location . '_' . $position);
+		// echo 'yearn_archive_' . $location . '_' . $position;
+	} elseif ( is_author() ) {
+		do_action('yearn_author_' . $location . '_' . $position);
+		// echo 'yearn_author_' . $location . '_' . $position;
+	} elseif ( is_date() ) {
+		do_action('yearn_date_' . $location . '_' . $position);
+		// echo 'yearn_date_' . $location . '_' . $position;
+	} elseif ( is_feed() ) {
+		do_action('yearn_feed_' . $location . '_' . $position);
+		// echo 'yearn_feed_' . $location . '_' . $position;
+	} elseif ( is_sticky() ) {
+		do_action('yearn_sticky_' . $location . '_' . $position);
+		// echo 'yearn_sticky_' . $location . '_' . $position;
+	} elseif ( is_category() ) {
+		do_action('yearn_category_' . $location . '_' . $position);
+		// echo 'yearn_category_' . $location . '_' . $position;
+	} elseif ( is_tag() ) {
+		do_action('yearn_tag_' . $location . '_' . $position);
+		// echo 'yearn_tag_' . $location . '_' . $position;
+	} elseif ( is_404() ) {
+		do_action('yearn_404_' . $location . '_' . $position);
+		// echo 'yearn_404_' . $location . '_' . $position;
+	}
 
+	if ( is_page() ) {
+		do_action('yearn_page_' . $location . '_' . $position);
+		// echo 'yearn_page_' . $location . '_' . $position;
+	}
 }
+add_action( 'yearn_masthead', 'yearn_theme_location_actions', 10, 2 );
 
-add_action( 'init', 'yearn_call_actions' );
+add_action( 'yearn_site_content_top', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_site_content_begin', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_primary_top', 'yearn_theme_location_actions', 20, 2 );
+
+add_action( 'yearn_entry_content_top', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_entry_content_begin', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_entry_content_end', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_entry_content_bottom', 'yearn_theme_location_actions', 20, 2 );
+
+add_action( 'yearn_primary_bottom', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_site_content_end', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_site_content_bottom', 'yearn_theme_location_actions', 20, 2 );
+
+add_action( 'yearn_secondary_top', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_secondary_begin', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_secondary_end', 'yearn_theme_location_actions', 20, 2 );
+add_action( 'yearn_secondary_bottom', 'yearn_theme_location_actions', 20, 2 );
+
+add_action( 'yearn_colophon', 'yearn_theme_location_actions', 10, 2 );

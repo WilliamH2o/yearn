@@ -18,11 +18,7 @@ get_header(); ?>
 	<div id="primary" class="<?php yearn_content_columns( $yearn_content_columns  ); ?> content-area col">
 		<main id="main" class="site-main" role="main">
 
-			<?php if ( is_front_page() ) {
-				do_action('yearn_home_page_top');
-			} ?>
-
-			<?php do_action('yearn_page_top'); ?>
+			<?php do_action('yearn_primary_top', 'primary', 'top'); ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
@@ -37,9 +33,7 @@ get_header(); ?>
 
 			<?php endwhile; // end of the loop. ?>
 
-			<?php if ( is_front_page() ) {
-				do_action('yearn_home_page_bottom');
-			} ?>
+			<?php do_action('yearn_primary_bottom', 'primary', 'bottom' ); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

@@ -10,12 +10,19 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
+			<?php do_action('yearn_primary_top', 'primary', 'top'); ?>
+
 			<section class="error-404 not-found">
 				<header class="page-header">
 					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'yearn' ); ?></h1>
 				</header><!-- .page-header -->
 
+				<?php do_action('yearn_entry_content_top', 'entry_content', 'top'); ?>
+
 				<div class="page-content">
+
+					<?php do_action('yearn_entry_content_begin', 'entry_content', 'begin'); ?>
+
 					<p><?php _e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'yearn' ); ?></p>
 
 					<?php get_search_form(); ?>
@@ -47,8 +54,15 @@ get_header(); ?>
 
 					<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
 
+					<?php do_action('yearn_entry_content_end', 'entry_content', 'end'); ?>
+
 				</div><!-- .page-content -->
+
+				<?php do_action('yearn_entry_content_bottom', 'entry_content', 'bottom'); ?>
+
 			</section><!-- .error-404 -->
+
+			<?php do_action('yearn_primary_bottom', 'primary', 'bottom' ); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

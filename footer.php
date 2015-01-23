@@ -7,14 +7,12 @@
  * @package yearn
  */
 ?>
-		<?php do_action( 'yearn_content_end' ); ?>
-
+		<?php do_action( 'yearn_site_content_end', 'content', 'end' ); ?>
 		</div><!-- .row -->
+	<?php do_action( 'yearn_site_content_bottom', 'content', 'bottom' ); ?>
 	</div><!-- .site-content -->
 	<footer id="colophon" class="site-footer color-one" role="contentinfo">
-		<?php do_action( 'yearn_footer_begin' ); ?>
-		<?php do_action( 'yearn_footer' ); ?>
-		<?php do_action( 'yearn_footer_end' ); ?>
+		<?php do_action( 'yearn_colophon', 'colophon', '' ); ?>
 	</footer><!-- #colophon -->
 
 </div><!-- #page -->

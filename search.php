@@ -11,11 +11,15 @@ get_header(); ?>
 	<div id="primary" class="<?php yearn_content_columns( $yearn_content_columns ); ?> content-area col">
 		<main id="main" class="site-main" role="main">
 
+			<?php do_action('yearn_primary_top', 'primary', 'top' ); ?>
+
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
 				<h1 class="page-title color-two"><?php printf( __( 'Search Results for: %s', 'yearn' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 			</header><!-- .page-header -->
+
+			<?php do_action('yearn_primary_header_bottom', 'bottom'); ?>
 
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); ?>
