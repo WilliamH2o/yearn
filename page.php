@@ -14,7 +14,6 @@ if ( is_front_page() ) {
 }
 
 get_header(); ?>
-
 	<div id="primary" class="<?php yearn_content_columns( $yearn_content_columns  ); ?> content-area col">
 		<main id="main" class="site-main" role="main">
 

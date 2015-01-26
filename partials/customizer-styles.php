@@ -8,16 +8,9 @@
 
 	$top_bar_fg = get_theme_mod( 'yearn_top_bar_foreground' );
 
-	$color_one_bg = get_theme_mod( 'yearn_color_one_background' );
-	$color_one_fg = get_theme_mod( 'yearn_color_one_foreground' );
-
-	$color_two_bg = get_theme_mod( 'yearn_color_two_background' );
-	$color_two_fg = get_theme_mod( 'yearn_color_two_foreground' );
-
 	?>
 
 	body {
-
 		background-color: <?php echo ( $body_bg ?  $body_bg : '#000000' ); ?>;
 		background-image: url("<?php  echo get_theme_mod( 'yearn-colors-site-background_image' ); ?>");
 	}
@@ -45,15 +38,28 @@
 
 	h3.entry-title { background-color: <?php // echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -10) ?>;}
 
-	.entry-date { background-color: <?php echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -5) ?>;}
-
 	.entry-excerpt { background-color: <?php echo get_theme_mod( 'yearn-colors-archives-content_background' ) ?>;}
 
 	#primary { background-color: <?php echo get_theme_mod( 'yearn-colors-site-content_background' ); ?>; }
 
 	#secondary { background-color: <?php echo get_theme_mod( 'yearn-colors-site-sidebar_background' ); ?>; }
 
-	#yearn-top-bar {
+	#masthead {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-masthead-background' ); ?>;
+		background-image: url("<?php  echo get_theme_mod( 'yearn-colors-masthead-background_image' ); ?>");
+		color: <?php echo get_theme_mod( 'yearn-colors-masthead-text' ); ?>;
+	}
+
+	#masthead .sub-menu {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-masthead-background' ); ?>;
+	}
+
+	#masthead a {
+		color: <?php echo get_theme_mod( 'yearn-colors-masthead-links' ); ?>;
+	}
+
+	#yearn-top-bar,
+	#yearn-top-bar .sub-menu {
 		background-color: <?php echo get_theme_mod( 'yearn-colors-topbar-background' ); ?>;
 		color: <?php echo get_theme_mod( 'yearn-colors-topbar-text' ); ?>;
 	}
@@ -62,7 +68,8 @@
 		color: <?php echo get_theme_mod( 'yearn-colors-topbar-links' ); ?>;
 	}
 
-	#yearn-stripe {
+	#yearn-stripe,
+	#yearn-stripe .sub-menu {
 		background-color: <?php echo get_theme_mod( 'yearn-colors-stripe-background' ); ?>;
 		color: <?php echo get_theme_mod( 'yearn-colors-stripe-text' ); ?>;
 	}
@@ -84,6 +91,7 @@
 	.nav-links a,
 	button,
 	.button,
+	.comment-reply-link,
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"] {

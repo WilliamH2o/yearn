@@ -50,7 +50,7 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php wp_head(); ?>
-	<?php get_template_part( 'partials/customizer-styles' ); ?>
+	<?php do_action('yearn_wp_head'); ?>
 </head>
 
 <body <?php body_class(); ?>>

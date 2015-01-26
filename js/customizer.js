@@ -173,18 +173,65 @@
 		});
 	});
 
+	// Masthead
+
+	// yearn-colors-masthead-background
+	wp.customize( 'yearn-colors-masthead-background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#masthead, #masthead .sub-menu' ).css(
+					'background-color', 'inherit'
+				);
+			} else {
+				$( '#masthead, #masthead .sub-menu' ).css(
+					'background-color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-masthead-text
+	wp.customize( 'yearn-colors-masthead-text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#masthead' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#masthead' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-masthead-links
+	wp.customize( 'yearn-colors-masthead-links', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#masthead a' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#masthead a' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
 	// Top Bar
 
 	// yearn-colors-topbar-background
 	wp.customize( 'yearn-colors-topbar-background', function( value ) {
 		value.bind( function( to ) {
 			if ( false === to ) {
-				$( '#yearn-top-bar' ).css(
-					'background', 'inherit'
+				$( '#yearn-top-bar, #yearn-top-bar .sub-menu' ).css(
+					'background-color', 'inherit'
 				);
 			} else {
-				$( '#yearn-top-bar' ).css(
-					'background', to
+				$( '#yearn-top-bar, #yearn-top-bar .sub-menu' ).css(
+					'background-color', to
 				);
 			}
 		});
@@ -226,12 +273,12 @@
 	wp.customize( 'yearn-colors-stripe-background', function( value ) {
 		value.bind( function( to ) {
 			if ( false === to ) {
-				$( '#yearn-stripe' ).css(
-					'background', 'inherit'
+				$( '#yearn-stripe, #yearn-stripe .sub-menu' ).css(
+					'background-color', 'inherit'
 				);
 			} else {
-				$( '#yearn-stripe' ).css(
-					'background', to
+				$( '#yearn-stripe, #yearn-stripe .sub-menu' ).css(
+					'background-color', to
 				);
 			}
 		});
@@ -273,12 +320,12 @@
 	wp.customize( 'yearn-colors-header-background', function( value ) {
 		value.bind( function( to ) {
 			if ( false === to ) {
-				$( '#yearn-site-header' ).css(
-					'background', 'inherit'
+				$( '#yearn-site-header, #yearn-site-header .sub-menu' ).css(
+					'background-color', 'inherit'
 				);
 			} else {
-				$( '#yearn-site-header' ).css(
-					'background', to
+				$( '#yearn-site-header, #yearn-site-header .sub-menu' ).css(
+					'background-color', to
 				);
 			}
 		});
@@ -353,11 +400,11 @@
 		value.bind( function( to ) {
 			if ( false === to ) {
 				$( '#yearn-site-footer' ).css(
-					'background', 'inherit'
+					'background-color', 'inherit'
 				);
 			} else {
 				$( '#yearn-site-footer' ).css(
-					'background', to
+					'background-color', to
 				);
 			}
 		});

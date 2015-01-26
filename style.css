@@ -49,16 +49,6 @@ and Blueprint http://www.blueprintcss.org/
 13.0 Other
 ***************************************************************/
 
-/**
- todo: see how border could be removed
-
- #yearn-top-bar { border-width: 0; }
-	#yearn-top-bar .element-with-border {
-		border: 1px solid $color;
-	 	border-width: inherit;
-	 }
-**/
-
 
 /***************************************************************
 1.0 - Reset
@@ -174,7 +164,8 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	.row {
-		max-width: 61.8%;
+		/*max-width: 61.8%;*/
+		max-width: 1140px;
 		margin: 0 auto;
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -188,6 +179,7 @@ and Blueprint http://www.blueprintcss.org/
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
+		background-color: inherit;
 	}
 
 	.row.middle {
@@ -377,7 +369,7 @@ and Blueprint http://www.blueprintcss.org/
 	textarea {
 		color: #333;
 		font-family: 'lato', sans-serif;
-		line-height: 1.458;
+		line-height: 1.5em;
 	}
 
 	button a {
@@ -610,6 +602,30 @@ and Blueprint http://www.blueprintcss.org/
 		margin-left: 1.5em;
 	}
 
+/* Add opacity to ol>li */
+	ol {
+		counter-reset:li;
+		margin-left: 1em;
+		padding-left:0;
+	}
+
+	ol > li {
+		position: relative;
+		margin:0 0 6px 2em;
+		padding:.1em 1em;
+		list-style:none;
+	}
+
+	ol > li:before {
+		content:counter(li);
+		counter-increment:li;
+		position:absolute;
+		left: -1em;
+		opacity: .5;
+		width: 1.1em;
+		text-align: right;
+	}
+
 	dt {
 		font-weight: bold
 	}
@@ -700,13 +716,17 @@ and Blueprint http://www.blueprintcss.org/
 		-webkit-border-radius: 8px;
 		-moz-border-radius: 8px;
 		border-radius: 8px;
+		text-align: center;
 	}
 
 	button:hover,
 	.button:hover,
 	input[type="button"]:hover,
 	input[type="reset"]:hover,
-	input[type="submit"]:hover { opacity: .9; }
+	input[type="submit"]:hover {
+		opacity: .9;
+		text-decoration: none;
+	}
 
 	.button {
 		display: inline-block;
@@ -715,8 +735,8 @@ and Blueprint http://www.blueprintcss.org/
 
 	a:visited.button,
 	a:hover.button {
-		color: #fff;
-		color: rgba(255, 255, 255, .9);
+		/*color: #fff;*/
+		/*color: rgba(255, 255, 255, .9);*/
 	}
 
 	input[type="checkbox"],
@@ -834,16 +854,23 @@ and Blueprint http://www.blueprintcss.org/
 	.hmenu li,
 	#masthead .widget_nav_menu li,
 	#yearn-bottom-bar .widget_nav_menu li {
+		display: inline-block;
 		position: relative;
-		float: left;
 	}
 
 	.hmenu a,
 	#masthead .widget_nav_menu a,
 	#yearn-bottom-bar .widget_nav_menu a {
-		display: block;
+		color: inherit;
+		display: inline-block;
 		padding: 1em;
 		text-decoration: none;
+	}
+
+	.hmenu a:hover,
+	#masthead .widget_nav_menu a:hover,
+	#yearn-bottom-bar .widget_nav_menu a:hover {
+		background-color: rgba(0,0,0,.2);
 	}
 
 	.top-bar:first-of-type .hmenu a {
@@ -856,8 +883,17 @@ and Blueprint http://www.blueprintcss.org/
 		display: none
 	}
 
-	.widget_nav_menu ul ul li {
-		border-bottom: 1px solid rgba(255, 255, 255, .2)
+	.sub-menu li::before {
+		content: "\200B ";
+		display: block;
+		opacity: .25;
+		border-top: 1px solid;
+		border-top-color: inherit;
+		max-height: 1px;
+	}
+
+	.sub-menu li:first-of-type::before {
+		border-top: 0;
 	}
 
 	.hmenu ul ul,
@@ -901,7 +937,9 @@ and Blueprint http://www.blueprintcss.org/
 		text-decoration: none;
 	}
 
-	a:not([href]):hover/*,
+	a:not([href]):hover,
+	#masthead .widget_nav_menu a:hover
+	/*,
 	*//*.widget li a:not([href]):hover,
 	.hmenu li > a:not([href]):hover*/ {
 		background-color: inherit
@@ -953,6 +991,8 @@ and Blueprint http://www.blueprintcss.org/
 	/*.sub-menu {*/
 		/*margin-left: 100px*/
 	/*}*/
+
+	.sub-menu { background-color: inherit; }
 
 	.sub-menu ul {
 		font-size: .618rem
@@ -1092,14 +1132,26 @@ and Blueprint http://www.blueprintcss.org/
 
 ***************************************************************/
 @media all {
+
 	.site-main .comment-navigation,
 	.site-main .posts-navigation,
 	.site-main .post-navigation {
 		margin-bottom: 1.618em;
-		overflow: hidden;
-		padding-top: .618em;
-		border-top: 1px solid rgba(0, 0, 0, .2);
 	}
+
+	.site-main .comment-navigation::before,
+	.site-main .posts-navigation::before,
+	.site-main .post-navigation::before {
+		content: "\200B ";
+		display: block;
+		opacity: .25;
+		border-top: 1px solid;
+		border-top-color: inherit;
+		max-height: 1px;
+		padding-top: 1em;
+	}
+
+
 
 	.comment-navigation .nav-previous,
 	.posts-navigation .nav-previous,
@@ -1201,6 +1253,9 @@ and Blueprint http://www.blueprintcss.org/
 	.comment-content::after,
 	.site-header::after,
 	.site-content::after,
+	/*#comment::after,*/
+	.post-navigation::after,
+	.comment-navigation::after,
 	.site-footer::after { clear: both }
 }
 
@@ -1217,10 +1272,13 @@ and Blueprint http://www.blueprintcss.org/
 			margin-bottom: 2em;
 			/*padding-bottom: 1.145em;*/
 			border: 1px solid rgba(0, 0, 0, .2);
+			background-color: inherit;
 		}
 
+		.widget > div { background-color: inherit; }
+
 		#secondary .widget,
-		#colophon .widget { overflow-x: auto; }
+		#colophon .widget { /*overflow-x: auto;*/ }
 
 		.widget:only-of-type { margin-bottom: 0; }
 
@@ -1282,29 +1340,62 @@ and Blueprint http://www.blueprintcss.org/
 
 		.widget ul {
 			list-style: none;
-			margin-left: .5em;
-			margin-right: .5em;
-			/*margin-left: -1.55em;*/
-			/*margin-right: -1.55em;*/
+			margin-left: -1em;
+			margin-right: -1em;
 		}
 
-		.widget_categories li,
-		.widget_recent_entries li,
-		.widget_nav_menu li	{ border-bottom: 1px solid rgba(255, 255, 255, .2) }
+		.widget li a {
+			padding-left: 1em;
+			padding-right: 1em;
+		}
 
-		.widget li:last-child {	border-bottom: none; }
+		/*.widget_categories li,*/
+		/*.widget_recent_entries li,*/
+		/*.widget_nav_menu li	{ border-bottom: 1px solid rgba(255, 255, 255, .2) }*/
+
+		/*.widget li:last-child {	border-bottom: none; }*/
+
+		.widget_categories li::before,
+		.widget_recent_entries li::before/*,
+		.widget_nav_menu li::before*/
+		{
+			content: "\200B ";
+			display: block;
+			opacity: .25;
+			border-top: 1px solid;
+			border-top-color: inherit;
+			max-height: 1px;
+		}
+
+		.widget_categories li:first-of-type::before,
+		.widget_recent_entries li:first-of-type::before/*,
+		.widget_nav_menu li:first-of-type::before*/
+		/*.widget li:first-of-type::before */{	border-top: 0; }
+
+		/*.sub-menu li:first-of-type::before {*/
+			/*border-top: 0;*/
+		/*}*/
+
+		.widget_categories ul,
+		.widget_recent_entries ul,
+		.widget_nav_menu ul,
+		.widget_archive ul {
+			margin-bottom: 1em;
+		}
 
 		.widget_categories li a,
 		.widget_recent_entries li a,
-		.widget_nav_menu li a {
+		.widget_nav_menu li a,
+		.widget_archive li a {
 			display: block;
-			padding: 1em;
+			padding-top: 1em;
+			padding-bottom: 1em;
 		}
 
 		.widget_categories li a:hover,
 		.widget_recent_entries li a:hover,
-		.widget_nav_menu li a:hover
-		 {
+		.widget_nav_menu li a:hover,
+		.widget_archive li a:hover {
 			background-color: rgba(0, 0, 0, .2);
 			text-decoration: none;
 		}
@@ -1584,41 +1675,43 @@ and Blueprint http://www.blueprintcss.org/
 		margin-bottom: 0
 	}
 
-	.top-bar li {
-		float: left;
+	#yearn-top-bar li {
 		background-color: rgba(0, 0, 0, .1);
 		margin: 2px;
 	}
 
-	.top-bar .menu li {
+	#yearn-top-bar .widget_nav_menu li {
 		background-color: inherit;
 		margin: 0;
 	}
 
-	.top-bar .menu span {
-		display: inline-block;
-		/*padding: .5em 0;*/
-		margin-right: 2px;
-		/*margin-top: .5em;*/
-		border-right: 1px solid;
-		border-color: inherit;
-		opacity: .3;
-	}
+	#yearn-top-bar .widget_nav_menu li::after{
+		 content: "\200B ";
+		 display: inline-block;
+		 border-right: 1px solid;
+		 border-color: inherit;
+		 margin-right: 3px;
+		 opacity: .5;
+		 line-height: 3em;
+	 }
 
-	.top-bar .menu li:last-of-type span {
+	#yearn-top-bar .widget_nav_menu li:last-of-type::after {
 		border-right: 0
 	}
 
-	.top-bar .widget li.recentcomments {
+	#yearn-top-bar .widget_nav_menu .sub-menu li::after{
+		display: none;
+	}
+
+	#masthead .widget li.recentcomments {
 		border-bottom: 0
 	}
 
-	.top-bar .search-bar {
+	#masthead .search-bar {
 		font-size: .764em;
 		background-color: rgba(0, 0, 0, .1);
 	}
 
-	/*.top-bar [class*=col]+[class*=col]:last-child { float: none }*/
 	/* Site Footer Widgets */
 	#yearn-site-footer .widget {
 		background-color: rgba(0, 0, 0, .1);
@@ -1648,24 +1741,38 @@ and Blueprint http://www.blueprintcss.org/
 10.0 Content
 ***************************************************************/
 @media all {
+
+	#masthead {
+		border-style: solid;
+		border-width: 0;
+		border-top-color: rgba(255, 255, 255, .2);
+		border-bottom-color: rgba(0, 0, 0, .6);
+	}
+
 	/* top-bar */
 	#yearn-top-bar {
-		border-top: 1px solid rgba(255, 255, 255, .2);
-		border-bottom: 1px solid rgba(0, 0, 0, .8);
+		border: inherit;
+		border-top-width: 1px;
+		border-bottom-width: 1px;
 		font-size: .618rem;
 		padding: .618em;
 	}
 
 	#yearn-stripe {
-		border-top: 1px solid rgba(255, 255, 255, .2);
-		border-bottom: 1px solid rgba(0, 0, 0, .5);
+		border: inherit;
+		border-top-width: 1px;
+		border-bottom-width: 1px;
 		font-size: .618rem;
 		padding: .618em;
 	}
 
+
+
 	/* site-header */
 	#yearn-site-header {
-		border-bottom: 1px solid rgba(0, 0, 0, .5);
+		border: inherit;
+		border-top-width: 1px;
+		border-bottom-width: 1px;
 		font-weight: 300;
 		font-size: .764rem;
 	}
@@ -1769,20 +1876,20 @@ and Blueprint http://www.blueprintcss.org/
 		-webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
 		box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+		margin-left: -1em;
 	}
+
+	.e
 
 	.entry-meta a:before,
 	.entry-meta time:before{ opacity: .6; }
 
-	.entry-date a {
-		opacity: 1;
-	}
-
 	.entry-date time {
 		display: inline-block;
-		background-color: rgba(0, 0, 0, .2);
+		background-color: rgba(0, 0, 0, .3);
 		padding: .618em;
 		opacity: 1;
+		margin-left: -1px;
 	}
 
 	.entry-meta span.meta {
@@ -1791,12 +1898,12 @@ and Blueprint http://www.blueprintcss.org/
 
 	.entry-meta span.entry-date {
 		padding: 0;
+		background-color: inherit;
 	}
 
 	.entry-date {
-		margin-left: -1em;
-		border: 1px solid rgba(0, 0, 0, .2);
-		border-top-color: rgba(255, 255, 255, .2);
+		border-top: 1px solid rgba(255, 255, 255, .2);
+		border-bottom: 1px solid rgba(0, 0, 0, .4);
 	}
 
 	.entry-date time::before {
@@ -1850,7 +1957,8 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	.entry-content li {
-		font-size: .764rem;
+		font-size: .9em;
+		margin-bottom: .618em;
 	}
 
 	article {
@@ -1862,47 +1970,8 @@ and Blueprint http://www.blueprintcss.org/
 		margin: 0 0 1.5em;
 	}
 
-	/* recent posts */
-	/*.recent-post { font-size: .85em }*/
-	/*.recent-post header {*/
-	/*font-size: .65em;*/
-	/*border: 1px solid #777;*/
-	/*border-top: none;*/
-	/*border-bottom: none;*/
-	/*}*/
-	/*.recent-post h1 {*/
-	/*font-weight: 400;*/
-	/*border: 0;*/
-	/*padding: 0;*/
-	/*border-bottom: 1px solid #525d66;*/
-	/*}*/
-	/*.recent-post h1 a {*/
-	/*outline: 1px solid red;*/
-	/*todo*/
-	/*display: block;*/
-	/*padding: 15px;*/
-	/*font-weight: 400;*/
-	/*color: #fff;*/
-	/*}*/
-	/*.recent-post h1 a:hover { text-decoration: underline }*/
-	/*.recent-post .entry-meta a { color: #fff }*/
-	/*.recent-post .entry-meta a:hover { text-decoration: underline }*/
-	/*.recent-post .entry-meta span {*/
-	/*outline: 1px solid red;*/
-	/*todo*/
-	/*display: block;*/
-	/*float: left;*/
-	/*padding: 8px 15px;*/
-	/*}*/
-	/*.recent-post .entry-excerpt {*/
-	/*margin-bottom: 15px;*/
-	/*padding: 15px;*/
-	/*background-color: #fff;*/
-	/*border: 1px solid #bbb;*/
-	/*border-top: none;*/
-	/*}*/
 	.itemized {
-		font-size: .764rem
+		font-size: .85rem
 	}
 
 	.itemized .entry-meta {
@@ -1953,7 +2022,7 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	ol.comment-list li {
-		background-color: #fff
+		/*background-color: #fff*/
 	}
 
 	ol.comment-list li.alt {
@@ -2117,6 +2186,7 @@ and Blueprint http://www.blueprintcss.org/
 	.form-allowed-tags {
 		display: none
 	}
+
 }
 
 /***************************************************************
@@ -2287,13 +2357,15 @@ and Blueprint http://www.blueprintcss.org/
 
 	.entry-excerpt {
 		padding: 1em;;
-		background-color: rgba(255, 255, 255, .8);
+		/*background-color: rgba(255, 255, 255, .8);*/
 		word-wrap: break-word;
 		-webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
 		box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
 		overflow: hidden;
 	}
+
+	.entry-excerpt img { width: 100%; }
 
 	.attachment-feature-sidebar {
 		outline: 1px solid red;
@@ -2319,12 +2391,11 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	.entry-footer {
-		padding-top: .618em;
-		margin-bottom: .618em;
+		margin-top: .618em;
 	}
 
 	.edit-link {
-		float: right;
+		text-align: right;
 		display: block;
 	}
 
@@ -2337,12 +2408,12 @@ and Blueprint http://www.blueprintcss.org/
 	.comment-reply-link,
 	.wp-pagenavi a,
 	.wp-pagenavi span {
-		font-size: .618rem;
+		font-size: .56rem;
 		padding: .5em 1em;
 		border: 1px solid rgba(0, 0, 0, .2);
 		display: inline-block;
 		margin: 2px 3px;
-		background-color: rgba(255, 255, 255, .8);
+		line-height: 1.5em;
 	}
 
 	.nav-links a:hover,
@@ -2434,7 +2505,7 @@ and Blueprint http://www.blueprintcss.org/
 		content: "\e606";
 		font-size: .75em;
 		vertical-align: baseline;
-		padding-top: 1px;
+		margin-left: 2px;
 	}
 
 	.nav-previous a::before {
@@ -2466,7 +2537,6 @@ html, body { font-size: 11pt; }
 	border: 0 !important;
 }
 
-	#top-bar,
 	#site-navigation,
 	.entry-meta .author,
 	.entry-meta .entry-category,
@@ -2475,7 +2545,9 @@ html, body { font-size: 11pt; }
 	.site-footer,
 	#comments,
 	.edit-link,
-	.nav-links { display: none; }
+	.nav-links {
+		display: none;
+	}
 
 	.row { max-width: 100%; }
 

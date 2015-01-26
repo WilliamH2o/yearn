@@ -21,19 +21,19 @@ function the_posts_navigation() {
 	?>
 	<nav class="navigation posts-navigation" role="navigation">
 		<h2 class="screen-reader-text"><?php _e( 'Posts navigation', 'yearn' ); ?></h2>
-		<div class="nav-links">
+		<div class="nav-links row">
 
-			<?php if ( get_next_posts_link() ) : ?>
-			<div class="nav-previous"><?php next_posts_link( __( ' Older', 'yearn' ) ); ?>
-
-
+			<?php if ( get_next_posts_link() ) { ?>
+			<div class="nav-previous">
+				<?php next_posts_link( __( ' Older', 'yearn' ) ); ?>
 			</div>
+			<?php } ?>
 
-			<?php endif; ?>
-
-			<?php if ( get_previous_posts_link() ) : ?>
-			<div class="nav-next"><?php previous_posts_link( __( 'Newer ', 'yearn' ) ); ?></div>
-			<?php endif; ?>
+			<?php if ( get_previous_posts_link() ) { ?>
+			<div class="nav-next">
+				<?php previous_posts_link( __( 'Newer ', 'yearn' ) ); ?>
+			</div>
+			<?php } ?>
 
 		</div><!-- .nav-links -->
 	</nav><!-- .navigation -->
@@ -41,99 +41,111 @@ function the_posts_navigation() {
 }
 endif;
 
-if ( ! function_exists( 'the_post_navigation' ) ) :
 /**
  * Display navigation to next/previous post when applicable.
  */
-function the_post_navigation() {
-	// Don't print empty markup if there's nowhere to navigate.
-	$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-	$next     = get_adjacent_post( false, '', false );
+if ( ! function_exists( 'yearn_the_post_navigation' ) ) {
+	function yearn_the_post_navigation() {
+		// Don't print empty markup if there's nowhere to navigate.
+		$previous = (is_attachment()) ? get_post(get_post()->post_parent) : get_adjacent_post(false, '', true);
+		$next = get_adjacent_post(false, '', false);
 
-	if ( ! $next && ! $previous ) {
-		return;
-	}
-	?>
-	<nav class="navigation post-navigation" role="navigation">
-		<h2 class="screen-reader-text"><?php _e( 'Post navigation', 'yearn' ); ?></h2>
-		<div class="nav-links">
-			<?php
-				previous_post_link( '<div class="nav-previous">%link</div>', '%title' );
+		if ( ! $next && ! $previous ) {
+			return;
+		} ?>
 
-				next_post_link( '<div class="nav-next">%link</div>', '%title' );
-			?>
-		</div><!-- .nav-links -->
-	</nav><!-- .navigation -->
-	<?php
+		<nav class="navigation post-navigation" role="navigation">
+			<h2 class="screen-reader-text"><?php _e('Post navigation', 'yearn'); ?></h2>
+
+			<div class="nav-links row">
+				<?php
+				previous_post_link('<div class="nav-previous">%link</div>', '%title');
+
+				next_post_link('<div class="nav-next">%link</div>', '%title');
+				?>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	<?php }
 }
-endif;
 
-if ( ! function_exists( 'yearn_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post-date/time and author.
- */
- 
+if ( ! function_exists( 'yearn_posted_on' ) ) {
+	/**
+	 * Prints HTML with meta information for the current post-date/time and author.
+	 */
+	function yearn_entry_meta() {
 
-function yearn_entry_meta() {
-	$time_string = '<time class="published updated" datetime="%1$s">%2$s</time>';
-	
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		if ( has_filter( 'yearn_remove', 'entry_meta' ) ) {
+			return;
+		}
+
+		if ( ! has_filter('yearn_remove', 'entry_meta_date')) {
+
+			$time_string = '<time class="published updated" datetime="%1$s">%2$s</time>';
+
+			if (get_the_time('U') !== get_the_modified_time('U')) {
+				$time_string = '<time class="published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+			}
+
+			$time_string = sprintf($time_string,
+				esc_attr(get_the_date('c')),
+				esc_html(get_the_date()),
+				esc_attr(get_the_modified_date('c')),
+				esc_html(get_the_modified_date())
+			);
+
+			if (is_single()) {
+				$posted_on = sprintf(
+					'<span class="entry-date meta col color-one" title=" article date"> ' . $time_string . ' </span>'
+				);
+			} else {
+				$posted_on = sprintf(
+					'<span class="entry-date meta col color-one" title=" article date"><a href="' . get_the_permalink() . '">' . $time_string . ' </span></a>'
+				);
+			}
+
+			$meta_text = $posted_on;
+
+		}
+
+		if ( ! has_filter('yearn_remove', 'entry_meta_author')) {
+
+			$byline = sprintf(
+				'<span class="author vcard meta col" title=" article author "><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '"> ' . esc_html(get_the_author()) . '</a> </span>'
+			);
+
+			$meta_text .= $byline;
+
+		}
+
+		if (yearn_categorized_blog() && get_post_type() != 'page' && ! has_filter('yearn_remove', 'entry_meta_categories')) {
+			// This blog has more than 1 category
+
+			$categories_list = get_the_category_list(__(', ', 'yearn'));
+
+			$categories_list_text = '<span class="entry-category meta col" title=" article categories "> ' . yearn_limit_taxonomies($categories_list) . '</span> ';
+
+			$meta_text .= $categories_list_text;
+
+		}
+
+		if ( ! has_filter('yearn_remove', 'entry_meta_tags')) {
+			$tag_list = get_the_tag_list(' ', __(', ', 'yearn'), ' ');
+
+			// This blog has tags
+			if ($tag_list != '') {
+
+				$tag_list_text = '<span class="entry-tags meta col" title=" article tags "> ' . yearn_limit_taxonomies($tag_list) . '</span>';
+
+				$meta_text .= $tag_list_text;
+			}
+		}
+
+		echo '<div class="entry-meta row">';
+		echo $meta_text;
+		echo '</div>';
 	}
-	
-	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		esc_html( get_the_modified_date() )
-	);
-
-	if ( is_single() ) {
-		$posted_on = sprintf(
-			'<span class="entry-date meta col color-one" title=" article date"> ' . $time_string . ' </span>'
-		);
-	} else {
-		$posted_on = sprintf(
-			'<span class="entry-date meta col color-one" title=" article date"><a href="' . get_the_permalink() . '">' . $time_string . ' </span></a>'
-		);
-	}
-
-
-	
-	$meta_text = $posted_on;
-
-
-		$byline = sprintf(
-		'<span class="author vcard meta col" title=" article author "><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '"> ' . esc_html( get_the_author() ) . '</a> </span>'
-	);
-	
-	$meta_text .= $byline;
-	
-	if ( yearn_categorized_blog() && get_post_type() != 'page' ) {
-	// This blog has more than 1 category
-
-		$categories_list = get_the_category_list( __( ', ', 'yearn' ) );
-
-		$categories_list_text =  '<span class="entry-category meta col" title=" article categories "> ' . yearn_limit_taxonomies( $categories_list ) . '</span> ';
-
-		$meta_text .= $categories_list_text;
-
-	}
-
-	$tag_list = get_the_tag_list( ' ', __( ', ', 'yearn' ), ' ' );
-
-	// This blog has tags 
-	if ( $tag_list != '' ) {
-
-		$tag_list_text =  '<span class="entry-tags meta col" title=" article tags "> ' . yearn_limit_taxonomies( $tag_list ) . '</span>';
-
-		$meta_text .= $tag_list_text;
-
-	}
-	
-	echo $meta_text;
 }
-endif;
 
 /**
  * Returns 1 taxonomy with " +# " of taxonomies

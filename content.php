@@ -5,17 +5,14 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'itemized' ); ?>>
+
 	<header class="entry-header-data">
+
 		<h3 class="entry-title color-one">
-			<?php // if ( is_sticky() ) {
-				// echo '<span class="sticky-pin" aria-hidden="true" data-icon="&#xe605;"></span> ';
-			// } ?>
 			<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 		</h3>
 
-		<div class="entry-meta row">
-			<?php  yearn_entry_meta(); ?>
-		</div><!-- .entry-meta -->
+		<?php yearn_entry_meta(); ?>
 
 	</header>
 

@@ -14,9 +14,8 @@
 			<?php the_title(); ?>
 		</h1>
 
-		<div class="entry-meta row">
-			<?php yearn_entry_meta(); ?>
-		</div><!-- .entry-meta -->
+		<?php yearn_entry_meta(); ?>
+
 	</header><!-- .entry-header -->
 
 	<?php do_action('yearn_entry_content_top', 'entry_content', 'top'); ?>
