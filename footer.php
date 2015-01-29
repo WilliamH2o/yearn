@@ -18,6 +18,7 @@
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
+<?php do_action('yearn_wp_footer'); ?>
 <script>
 
 
