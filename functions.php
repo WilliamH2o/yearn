@@ -228,9 +228,8 @@ add_action( 'wp_enqueue_scripts', 'yearn_fonts_enqueue', 15 );
  * https://gist.github.com/chaoszcat/5325115#file-gistfile1-php
  * Originally from http://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color
  */
-// todo: prefix with yearn
-if ( ! function_exists('shadeColor')) {
-	function shadeColor($color, $percent) {
+if ( ! function_exists('yearn_shade_color')) {
+	function yearn_shade_color($color, $percent) {
 		$num = base_convert(substr($color, 1), 16, 10);
 		$amt = round(2.55 * $percent);
 		$r = ($num >> 16) + $amt;

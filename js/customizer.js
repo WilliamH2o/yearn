@@ -267,6 +267,36 @@
 		});
 	});
 
+	// yearn-colors-topbar-buttons-background
+	wp.customize( 'yearn-colors-topbar-button-background', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-top-bar button, #yearn-top-bar a.button, #yearn-top-bar .button a, #yearn-top-bar input[type="button"], #yearn-top-bar input[type="reset"], #yearn-top-bar input[type="submit"]' ).css(
+					'background-color', 'inherit'
+				);
+			} else {
+				$( '#yearn-top-bar button, #yearn-top-bar a.button, #yearn-top-bar .button a, #yearn-top-bar input[type="button"], #yearn-top-bar input[type="reset"], #yearn-top-bar input[type="submit"]' ).css(
+					'background-color', to
+				);
+			}
+		});
+	});
+
+	// yearn-colors-topbar-buttons-text
+	wp.customize( 'yearn-colors-topbar-button-text', function( value ) {
+		value.bind( function( to ) {
+			if ( false === to ) {
+				$( '#yearn-top-bar button, #yearn-top-bar a.button, #yearn-top-bar .button a, #yearn-top-bar input[type="button"], #yearn-top-bar input[type="reset"], #yearn-top-bar input[type="submit"]' ).css(
+					'color', 'inherit'
+				);
+			} else {
+				$( '#yearn-top-bar button, #yearn-top-bar a.button, #yearn-top-bar .button a, #yearn-top-bar input[type="button"], #yearn-top-bar input[type="reset"], #yearn-top-bar input[type="submit"]' ).css(
+					'color', to
+				);
+			}
+		});
+	});
+
 	// Stripe
 
 	// yearn-colors-stripe-background
@@ -367,11 +397,11 @@
 	wp.customize( 'yearn-colors-content-button-background', function( value ) {
 		value.bind( function( to ) {
 			if ( false === to ) {
-				$( '.edit-link a, .nav-links a, button,	.button, input[type="button"], input[type="reset"],	input[type="submit"]' ).css(
+				$( '.edit-link a, .nav-links a, button, .comment-reply-link, a.button, .button a, input[type="button"], input[type="reset"], input[type="submit"]' ).css(
 					'background-color', 'inherit'
 				);
 			} else {
-				$( '.edit-link a, .nav-links a, button,	.button, input[type="button"], input[type="reset"],	input[type="submit"]' ).css(
+				$( '.edit-link a, .nav-links a, button, .comment-reply-link, a.button, .button a, input[type="button"], input[type="reset"], input[type="submit"]' ).css(
 					'background-color', to
 				);
 			}

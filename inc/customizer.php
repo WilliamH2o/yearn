@@ -12,6 +12,11 @@
  *
  * todo need themes : is theme A is set change defaults
  * todo reset button
+ * todo add Icon Font section
+ * todo option display excerpt or full
+ * todo template selects
+ * todo add select font text box for default and headers
+ * todo disable borders
  *
  */
 
@@ -45,8 +50,7 @@ function yearn_customize_register( $wp_customize ) {
 //			}
 		}
 	}
-	class yearn_Customize_Text extends WP_Customize_Control
-	{
+	class yearn_Customize_Text extends WP_Customize_Control {
 		public $settings = 'blogname';
 		public $type = 'text';
 		public $text = '';
@@ -58,6 +62,121 @@ function yearn_customize_register( $wp_customize ) {
 				echo '<p class="description customize-section-description">' . $this->text . '</p>';
 			}
 
+		}
+	}
+
+	class yearn_Customize_Layout_Sections extends WP_Customize_Control {
+		public $col_type = '';
+
+		public function render_content() {
+			?>
+			<script>
+				jQuery( document ).ready( function( $ ) {
+
+					/**
+					 * todo refactor
+					 */
+
+					if ( $( '#<?php echo $this->col_type ?> select' ).val() === 'none' ) {
+						$( '#<?php echo $this->col_type ?>-col_1' ).fadeOut( 400 );
+						$( '#<?php echo $this->col_type ?>-col_2' ).fadeOut( 400 );
+						$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+						$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+						$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+					} else {
+						if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 1 ) {
+							$( '#<?php echo $this->col_type ?>-col_1' ).show();
+							$( '#<?php echo $this->col_type ?>-col_2' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+						} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 2 ) {
+							$( '#<?php echo $this->col_type ?>-col_1' ).show();
+							$( '#<?php echo $this->col_type ?>-col_2' ).show();
+							$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+						} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 3 ) {
+							$( '#<?php echo $this->col_type ?>-col_1' ).show();
+							$( '#<?php echo $this->col_type ?>-col_2' ).show();
+							$( '#<?php echo $this->col_type ?>-col_3' ).show();
+							$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+						} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 4 ) {
+							$( '#<?php echo $this->col_type ?>-col_1' ).show();
+							$( '#<?php echo $this->col_type ?>-col_2' ).show();
+							$( '#<?php echo $this->col_type ?>-col_3' ).show();
+							$( '#<?php echo $this->col_type ?>-col_4' ).show();
+							$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+						} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 5 ) {
+							$( '#<?php echo $this->col_type ?>-col_1' ).show();
+							$( '#<?php echo $this->col_type ?>-col_2' ).show();
+							$( '#<?php echo $this->col_type ?>-col_3' ).show();
+							$( '#<?php echo $this->col_type ?>-col_4' ).show();
+							$( '#<?php echo $this->col_type ?>-col_5' ).show();
+						} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 0 ) {
+							$( '#<?php echo $this->col_type ?>-col_1' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_2' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+						}
+					}
+
+					// Lets do it again when the user changes the Select value of the Column Widths
+					$( '#<?php echo $this->col_type ?> select' ).change( 'click', function() {
+
+						// Lets get the col count and then show or hide the each column type
+						if ( $( '#<?php echo $this->col_type ?> select' ).val() === 'none' ) {
+							$( '#<?php echo $this->col_type ?>-col_1' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_2' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+							$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+						} else {
+							if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 1 ) {
+								$( '#<?php echo $this->col_type ?>-col_1' ).show();
+								$( '#<?php echo $this->col_type ?>-col_2' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+							} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 2 ) {
+								$( '#<?php echo $this->col_type ?>-col_1' ).show();
+								$( '#<?php echo $this->col_type ?>-col_2' ).show();
+								$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+							} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 3 ) {
+								$( '#<?php echo $this->col_type ?>-col_1' ).show();
+								$( '#<?php echo $this->col_type ?>-col_2' ).show();
+								$( '#<?php echo $this->col_type ?>-col_3' ).show();
+								$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+							} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 4 ) {
+								$( '#<?php echo $this->col_type ?>-col_1' ).show();
+								$( '#<?php echo $this->col_type ?>-col_2' ).show();
+								$( '#<?php echo $this->col_type ?>-col_3' ).show();
+								$( '#<?php echo $this->col_type ?>-col_4' ).show();
+								$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+							} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 5 ) {
+								$( '#<?php echo $this->col_type ?>-col_1' ).show();
+								$( '#<?php echo $this->col_type ?>-col_2' ).show();
+								$( '#<?php echo $this->col_type ?>-col_3' ).show();
+								$( '#<?php echo $this->col_type ?>-col_4' ).show();
+								$( '#<?php echo $this->col_type ?>-col_5' ).show();
+							} else if ( $( '#<?php echo $this->col_type ?> select' ).val().split( '/' ).length === 0 ) {
+								$( '#<?php echo $this->col_type ?>-col_1' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_2' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_3' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_4' ).fadeOut( 400 );
+								$( '#<?php echo $this->col_type ?>-col_5' ).fadeOut( 400 );
+							}
+						}
+
+					});
+				});
+			</script>
+		<?php
 		}
 	}
 
@@ -101,6 +220,9 @@ if ( ! function_exists('yearn_customize_layout') ) {
 
 // Layout - Top Bar
 if ( ! function_exists('yearn_customize_layout_topbar') ) {
+	/**
+	 * @param $wp_customize
+	 */
 	function yearn_customize_layout_topbar($wp_customize) {
 
 		if ( has_filter( 'yearn_remove','topbar' ) ) {
@@ -110,22 +232,38 @@ if ( ! function_exists('yearn_customize_layout_topbar') ) {
 		// Top Bar Layout
 		yearn_customize_section($wp_customize, 'yearn-layout-topbar', __('Top Bar', 'yearn'), 'yearn-layout');
 
-		yearn_customize_setting_checkbox($wp_customize, 'yearn-topbar-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-topbar');
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-topbar-sections_cols', 'yearn-layout-topbar', 'customize-control-yearn-topbar-sections' );
 
-		yearn_customize_setting_select($wp_customize, 'yearn-topbar-sections', 'logo-large_widget', 'refresh', __('Sections', 'yearn'), 'yearn-layout-topbar', array(
+		yearn_customize_setting_select($wp_customize, 'yearn-topbar-sections', '100', 'refresh', __('Column Widths', 'yearn'), 'yearn-layout-topbar', array(
 			'none' => __('None', 'yearn'),
-			'full_widget' => __('1 Full Widget', 'yearn'),
-			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
-			'small_widget-small_widget-small_widget' => __('3 Small Widgets', 'yearn'),
-			'large_widget-small_widget' => __('1 Large & 1 Small Widgets', 'yearn'),
-			'small_widget-large_widget' => __('1 Small & 1 Large Widgets', 'yearn'),
-			'logo' => __('1 Logo', 'yearn'),
-			'logo-large_widget' => __('1 Logo & 1 Large Widgets', 'yearn'),
-			'logo-small_widget-small_widget' => __('1 Logo & 2 Small Widgets', 'yearn'),
-			'small_widget-logo-small_widget' => __('1 Small Widget & 1 Logo & 1 Small Widget', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
 		));
 
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-topbar-sections', 'none', 'yearn-layout-topbar' );
+
 		yearn_customize_setting_text( $wp_customize, 'topbar', 'yearn-layout-topbar',  __('After Save &amp; Publish, If changes are not as expected, Please Reload Your Browser.', 'yearn')  );
+
+		yearn_customize_setting_checkbox($wp_customize, 'yearn-topbar-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-topbar');
 
 //		yearn_customize_setting_checkbox($wp_customize, 'yearn-topbar-borders', 0, 'postMessage', __('Disable Borders', 'yearn'), 'yearn-layout-topbar');
 	}
@@ -144,18 +282,34 @@ if ( ! function_exists('yearn_customize_layout_stripe') ) {
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-stripe-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-stripe');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-stripe-sections', 'large_widget-small_widget', 'refresh', __('Sections', 'yearn'), 'yearn-layout-stripe', array(
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-stripe-sections_cols', 'yearn-layout-stripe', 'customize-control-yearn-stripe-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-stripe-sections', '100', 'refresh', __('Column Widths', 'yearn'), 'yearn-layout-stripe', array(
 			'none' => __('None', 'yearn'),
-			'full_widget' => __('1 Full Widget', 'yearn'),
-			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
-			'small_widget-small_widget-small_widget' => __('3 Small Widgets', 'yearn'),
-			'large_widget-small_widget' => __('1 Large & 1 Small Widgets', 'yearn'),
-			'small_widget-large_widget' => __('1 Small & 1 Large Widgets', 'yearn'),
-			'logo' => __('1 Logo', 'yearn'),
-			'logo-large_widget' => __('1 Logo & 1 Large Widgets', 'yearn'),
-			'logo-small_widget-small_widget' => __('1 Logo & 2 Small Widgets', 'yearn'),
-			'small_widget-logo-small_widget' => __('1 Small Widget & 1 Logo & 1 Small Widget', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
 		));
+
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-stripe-sections', 'none', 'yearn-layout-stripe' );
 
 		yearn_customize_setting_text( $wp_customize, 'yearn_stripe_reload_me', 'yearn-layout-stripe', 'After Save &amp; Publish, If changes are not as expected, Please Reload Your Browser.' );
 
@@ -176,14 +330,34 @@ if ( ! function_exists('yearn_customize_layout_header') ) {
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-header-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-header');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-header-sections', 'menu', 'refresh', __('Sections', 'yearn'), 'yearn-layout-header', array(
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-header-sections_cols', 'yearn-layout-header', 'customize-control-yearn-header-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-header-sections', '100', 'refresh', __('Column Widths', 'yearn'), 'yearn-layout-header', array(
 			'none' => __('None', 'yearn'),
-			'logo_full' => __('Logo', 'yearn'),
-			'menu' => __('Primary Menu', 'yearn'),
-			'full_widget' => __('Full Widget', 'yearn'),
-			'logo_full-menu' => __('1 Logo & 1 Primary Menu', 'yearn'),
-			'logo_full-full_widget' => __('1 Logo & 1 Widget', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
 		));
+
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-header-sections', 'none', 'yearn-layout-header' );
 
 		yearn_customize_setting_text( $wp_customize, 'yearn_header_reload_me', 'yearn-layout-header', 'After Save &amp; Publish, If changes are not as expected, Please Reload Your Browser.' );
 
@@ -207,33 +381,152 @@ if ( ! function_exists('yearn_customize_layout_home_page') ) {
 			'two_column' => __('2 Columns Default', 'yearn'),
 		));
 
-		yearn_customize_setting_select($wp_customize, 'yearn-home_page_top-sections', 'full', 'refresh', __('Top Sections', 'yearn'), 'yearn-layout-home_page', array(
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-home_page_top-sections_cols', 'yearn-layout-home_page', 'customize-control-yearn-home_page_top-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-home_page_top-sections', '100', 'refresh', __('Top Section Column Widths', 'yearn'), 'yearn-layout-home_page', array(
 			'none' => __('None', 'yearn'),
-			'full_widget' => __('1 Full Widget', 'yearn'),
-			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
-			'small_widget-small_widget-small_widget' => __('3 Small Widgets', 'yearn'),
-			'large_widget-small_widget' => __('1 Large & 1 Small Widgets', 'yearn'),
-			'small_widget-large_widget' => __('1 Small & 1 Large Widgets', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
 		));
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-home_page_top-sections', 'none', 'yearn-layout-home_page' );
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-home_page_top-padding', 0, 'refresh', __('Fill Horizontally', 'yearn'), 'yearn-layout-home_page');
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-home_page_title', 0, 'refresh', __('Display Title on Home Page', 'yearn'), 'yearn-layout-home_page');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-home_page_bottom-sections', 'full', 'refresh', __('Bottom Sections', 'yearn'), 'yearn-layout-home_page', array(
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-home_page_bottom-sections_cols', 'yearn-layout-home_page', 'customize-control-yearn-home_page_bottom-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-home_page_bottom-sections', '100', 'refresh', __('bottom Section Column Widths', 'yearn'), 'yearn-layout-home_page', array(
 			'none' => __('None', 'yearn'),
-			'full_widget' => __('1 Full Widget', 'yearn'),
-			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
-			'small_widget-small_widget-small_widget' => __('3 Small Widgets', 'yearn'),
-			'large_widget-small_widget' => __('1 Large & 1 Small Widgets', 'yearn'),
-			'small_widget-large_widget' => __('1 Small & 1 Large Widgets', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
 		));
+
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-home_page_bottom-sections', 'none', 'yearn-layout-home_page' );
 
 		yearn_customize_setting_text( $wp_customize, 'topbar', 'yearn-layout-home_page',  __('After Save &amp; Publish, If changes are not as expected, Please Reload Your Browser.', 'yearn')  );
 
 	}
 	add_action( 'yearn_customize_layout', 'yearn_customize_layout_home_page', 40, 1 );
 }
+
+// Layout - Site Content
+if ( ! function_exists('yearn_customize_layout_site_content') ) {
+	function yearn_customize_layout_site_content($wp_customize) {
+
+		if ( has_filter( 'yearn_remove','site_content' ) ) {
+			return;
+		}
+
+		yearn_customize_section($wp_customize, 'yearn-layout-site_content', __('site_content', 'yearn'), 'yearn-layout');
+
+		yearn_customize_setting_select($wp_customize, 'yearn-site_content-sections', 'two_column', 'refresh', __('Sections', 'yearn'), 'yearn-layout-site_content', array(
+			'one_column' => __('1 Column Default', 'yearn'),
+			'two_column' => __('2 Columns Default', 'yearn'),
+		));
+
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-site_content_top-sections_cols', 'yearn-layout-site_content', 'customize-control-yearn-site_content_top-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-site_content_top-sections', '100', 'refresh', __('Top Section Column Widths', 'yearn'), 'yearn-layout-site_content', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-site_content_top-sections', 'none', 'yearn-layout-site_content' );
+
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-site_content_bottom-sections_cols', 'yearn-layout-site_content', 'customize-control-yearn-site_content_bottom-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-site_content_bottom-sections', '100', 'refresh', __('Bottom Section Column Widths', 'yearn'), 'yearn-layout-site_content', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-site_content_bottom-sections', 'none', 'yearn-layout-site_content' );
+
+		yearn_customize_setting_checkbox($wp_customize, 'yearn-site_content-comments', 0, 'refresh', __('Disable Comments', 'yearn'), 'yearn-layout-site_content');
+
+	}
+	add_action( 'yearn_customize_layout', 'yearn_customize_layout_site_content', 50, 1 );
+}
+
 
 // Layout - Pages
 if ( ! function_exists('yearn_customize_layout_pages') ) {
@@ -249,6 +542,64 @@ if ( ! function_exists('yearn_customize_layout_pages') ) {
 			'one_column' => __('1 Column Default', 'yearn'),
 			'two_column' => __('2 Columns Default', 'yearn'),
 		));
+
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-pages_top-sections_cols', 'yearn-layout-pages', 'customize-control-yearn-pages_top-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-pages_top-sections', '100', 'refresh', __('Top Section Column Widths', 'yearn'), 'yearn-layout-pages', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-pages_top-sections', 'none', 'yearn-layout-pages' );
+
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-pages_bottom-sections_cols', 'yearn-layout-pages', 'customize-control-yearn-pages_bottom-sections' );
+
+		yearn_customize_setting_select($wp_customize, 'yearn-pages_bottom-sections', '100', 'refresh', __('Bottom Section Column Widths', 'yearn'), 'yearn-layout-pages', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-pages_bottom-sections', 'none', 'yearn-layout-pages' );
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-pages-comments', 0, 'refresh', __('Disable Comments', 'yearn'), 'yearn-layout-pages');
 
@@ -271,6 +622,70 @@ if ( ! function_exists('yearn_customize_layout_posts') ) {
 			'two_column' => __('2 Columns', 'yearn'),
 		));
 
+		// add jQuery
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-posts_top-sections_cols', 'yearn-layout-posts', 'customize-control-yearn-posts_top-sections' );
+
+		// add Column Widths
+		yearn_customize_setting_select($wp_customize, 'yearn-posts_top-sections', '100', 'refresh', __('top Section Column Widths', 'yearn'), 'yearn-layout-posts', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		// add Column #s
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-posts_top-sections', 'none', 'yearn-layout-posts' );
+
+		// add jQuery
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-posts_bottom-sections_cols', 'yearn-layout-posts', 'customize-control-yearn-posts_bottom-sections' );
+
+		// add Column Widths
+		yearn_customize_setting_select($wp_customize, 'yearn-posts_bottom-sections', '100', 'refresh', __('Bottom Section Column Widths', 'yearn'), 'yearn-layout-posts', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		// add Column #s
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-posts_bottom-sections', 'none', 'yearn-layout-posts' );
+
 		yearn_customize_setting_text( $wp_customize, 'yearn_posts_reload_me', 'yearn-layout-posts', 'After Save &amp; Publish, If changes are not as expected, Please Reload Your Browser.' );
 	}
 	add_action( 'yearn_customize_layout', 'yearn_customize_layout_posts', 60, 1 );
@@ -291,6 +706,70 @@ if ( ! function_exists('yearn_customize_layout_archives') ) {
 			'two_column' => __('2 Columns', 'yearn'),
 		));
 
+		// add jQuery
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-archives_top-sections_cols', 'yearn-layout-archives', 'customize-control-yearn-archives_top-sections' );
+
+		// add Column Widths
+		yearn_customize_setting_select($wp_customize, 'yearn-archives_top-sections', '100', 'refresh', __('top Section Column Widths', 'yearn'), 'yearn-layout-archives', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		// add Column #s
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-archives_top-sections', 'none', 'yearn-layout-archives' );
+
+		// add jQuery
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-archives_bottom-sections_cols', 'yearn-layout-archives', 'customize-control-yearn-archives_bottom-sections' );
+
+		// add Column Widths
+		yearn_customize_setting_select($wp_customize, 'yearn-archives_bottom-sections', '100', 'refresh', __('Bottom Section Column Widths', 'yearn'), 'yearn-layout-archives', array(
+			'none' => __('None', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
+		));
+
+		// add Column #s
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-archives_bottom-sections', 'none', 'yearn-layout-archives' );
+
 		yearn_customize_setting_text( $wp_customize, 'yearn_archives_reload_me', 'yearn-layout-archives', 'After Save &amp; Publish, If changes are not as expected, Please Reload Your Browser.' );
 
 	}
@@ -307,17 +786,37 @@ if ( ! function_exists('yearn_customize_layout_footer') ) {
 
 		yearn_customize_section($wp_customize, 'yearn-layout-footer', __('Footer', 'yearn'), 'yearn-layout');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-footer-sections', 'three_column', 'refresh', __('Sections', 'yearn'), 'yearn-layout-footer', array(
+		// add jQuery
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-footer-sections_cols', 'yearn-layout-footer', 'customize-control-yearn-footer-sections' );
+
+		// add Column Widths
+		yearn_customize_setting_select($wp_customize, 'yearn-footer-sections', '100', 'refresh', __('Column Widths', 'yearn'), 'yearn-layout-footer', array(
 			'none' => __('None', 'yearn'),
-			'full_widget' => __('1 Full Widget', 'yearn'),
-			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
-			'small_widget-small_widget-small_widget' => __('3 Small Widgets', 'yearn'),
-			'large_widget-small_widget' => __('1 Large & 1 Small Widgets', 'yearn'),
-			'small_widget-large_widget' => __('1 Small & 1 Large Widgets', 'yearn'),
-			'large_widget-logo' => __('1 Logo & 1 Large Widgets', 'yearn'),
-			'small_widget-small_widget-logo' => __('1 Logo & 2 Small Widgets', 'yearn'),
-			'small_widget-logo-small_widget' => __('1 Small Widget & 1 Logo & 1 Small Widget', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
 		));
+
+		// add Column #s
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-footer-sections', 'none', 'yearn-layout-footer' );
 
 		// todo: this text own function
 		yearn_customize_setting_text( $wp_customize, 'yearn-footer-reload-me', 'yearn-layout-footer', 'After Save &amp; Publish, If changes are not as expected, Please Reload Your Browser.' );
@@ -339,17 +838,37 @@ if ( ! function_exists('yearn_customize_layout_bottombar') ) {
 
 		yearn_customize_setting_checkbox($wp_customize, 'yearn-bottombar-display', 0, 'refresh', __('Disable', 'yearn'), 'yearn-layout-bottombar');
 
-		yearn_customize_setting_select($wp_customize, 'yearn-bottombar-sections', 'full', 'refresh', __('Sections', 'yearn'), 'yearn-layout-bottombar', array(
+		// add jQuery
+		yearn_customize_setting_layout_sections( $wp_customize, 'yearn-bottombar-sections_cols', 'yearn-layout-bottombar', 'customize-control-yearn-bottombar-sections' );
+
+		// add Column Widths
+		yearn_customize_setting_select($wp_customize, 'yearn-bottombar-sections', '100', 'refresh', __('Column Widths', 'yearn'), 'yearn-layout-bottombar', array(
 			'none' => __('None', 'yearn'),
-			'full_widget' => __('1 Full Widget', 'yearn'),
-			'medium_widget-medium_widget' => __('2 Medium Widgets', 'yearn'),
-			'small_widget-small_widget-small_widget' => __('3 Small Widgets', 'yearn'),
-			'large_widget-small_widget' => __('1 Large & 1 Small Widgets', 'yearn'),
-			'small_widget-large_widget' => __('1 Small & 1 Large Widgets', 'yearn'),
-			'large_widget-logo' => __('1 Logo & 1 Large Widgets', 'yearn'),
-			'small_widget-small_widget-logo' => __('1 Logo & 2 Small Widgets', 'yearn'),
-			'small_widget-logo-small_widget' => __('1 Small Widget & 1 Logo & 1 Small Widget', 'yearn'),
+			'100' => __('100', 'yearn'),
+			'75/25' => __('75/25', 'yearn'),
+			'66/33' => __('66/33', 'yearn'),
+			'60/40' => __('60/40', 'yearn'),
+			'60/20/20' => __('60/20/20', 'yearn'),
+			'50/50' => __('50/50', 'yearn'),
+			'50/25/25' => __('50/25/25', 'yearn'),
+			'40/60' => __('40/60', 'yearn'),
+			'40/40/20' => __('40/40/20', 'yearn'),
+			'40/20/40' => __('40/20/40', 'yearn'),
+			'40/20/20/20' => __('40/20/20/20', 'yearn'),
+			'33/33/33' => __('33/33/33', 'yearn'),
+			'25/75' => __('25/75', 'yearn'),
+			'25/50/25' => __('25/50/25', 'yearn'),
+			'25/25/50' => __('25/25/50', 'yearn'),
+			'25/25/25/25' => __('25/25/25/25', 'yearn'),
+			'20/40/40' => __('20/40/40', 'yearn'),
+			'20/40/20/20' => __('20/40/20/20', 'yearn'),
+			'20/20/40/20' => __('20/20/40/20', 'yearn'),
+			'20/20/20/40' => __('20/20/20/40', 'yearn'),
+			'20/20/20/20/20' => __('20/20/20/20/20', 'yearn'),
 		));
+
+		// add Column #s
+		yearn_customize_setting_layout_sections_generate_cols( $wp_customize, 'yearn-bottombar-sections', 'none', 'yearn-layout-bottombar' );
 
 		yearn_customize_setting_text( $wp_customize, 'yearn_bottombar_reload_me', 'yearn-layout-bottombar', 'After Save &amp; Publish, If changes are not as expected, Please Reload Your
 		Browser.' );
@@ -384,7 +903,7 @@ if ( ! function_exists('yearn_customize_colors_site') ) {
 	{
 		yearn_customize_section($wp_customize, 'yearn-colors-site', __('Site', 'yearn'), 'yearn-colors');
 
-		yearn_customize_setting_color($wp_customize, 'yearn-colors-site-background', '#E6E6E6', __('Background', 'yearn'), 'yearn-colors-site');
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-site-background', false, __('Background', 'yearn'), 'yearn-colors-site');
 
 		yearn_customize_setting_image($wp_customize, 'yearn-colors-site-background_image', 'refresh', __('Background Image', 'yearn'), 'yearn-colors-site');
 
@@ -437,6 +956,10 @@ if ( ! function_exists('yearn_customize_colors_topbar') ) {
 		yearn_customize_setting_color($wp_customize, 'yearn-colors-topbar-text', false, __('Text', 'yearn'), 'yearn-colors-topbar');
 
 		yearn_customize_setting_color($wp_customize, 'yearn-colors-topbar-links', false, __('Links', 'yearn'), 'yearn-colors-topbar');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-topbar-button-background', false, __('Button Background', 'yearn'), 'yearn-colors-topbar');
+
+		yearn_customize_setting_color($wp_customize, 'yearn-colors-topbar-button-text', false, __('Button Text', 'yearn'), 'yearn-colors-topbar');
 
 	}
 	add_action( 'yearn_customize_colors', 'yearn_customize_colors_topbar', 20, 1 );
@@ -740,7 +1263,59 @@ function yearn_customize_setting_text( $wp_customize, $name, $section, $text ) {
 			)
 		)
 	);
+}
 
+/**
+ * @param $wp_customize
+ * @param $name
+ * @param $section
+ * @param $col_type
+ */
+function yearn_customize_setting_layout_sections( $wp_customize, $name, $section, $col_type ) {
+	$wp_customize->add_setting(
+		$name,
+		array()
+	);
+
+	$wp_customize->add_control(
+		new yearn_Customize_Layout_Sections(
+			$wp_customize,
+			$name,
+			array(
+				'col_type'		=> $col_type,
+				'label'   		=> '',
+				'section'		=> $section,
+				'priority' 		=> 1
+			)
+		)
+	);
+}
+
+/**
+ * @param $wp_customize
+ * @param $name
+ * @param $default
+ * @param $section
+ */
+function yearn_customize_setting_layout_sections_generate_cols( $wp_customize, $name, $default, $section ) {
+
+	$label = __('Column', 'yearn');
+
+	for ( $i = 1; $i <= 5; $i++ ) {
+
+		yearn_customize_setting_select($wp_customize, $name.'-col_'.$i, $default, 'refresh', $label.$i, $section, array(
+			'none' => __('None', 'yearn'),
+			'logo' => __('Logo Image', 'yearn'),
+			'text' => __('Branding Text', 'yearn'),
+			'widget_left' => __('Widget - Left Aligned', 'yearn'),
+			'widget_right' => __('Widget - Right Aligned', 'yearn'),
+			'widget_center' => __('Widget - Center Aligned', 'yearn'),
+			'menu_left' => __('Menu - Left Aligned', 'yearn'),
+			'menu_right' => __('Menu - - Right Aligned', 'yearn'),
+			'menu_center' => __('Menu - Center Aligned', 'yearn'),
+		));
+
+	}
 
 }
 

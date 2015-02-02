@@ -34,18 +34,20 @@ get_header(); ?>
 				?>
 
 			<?php endwhile; ?>
+
 			<?php if(function_exists('wp_pagenavi')) : ?>
 				<?php wp_pagenavi(); ?>
 			<?php else : ?>
 				<?php the_posts_navigation(); ?>
 			<?php endif; ?>
 
-
 		<?php else : ?>
 
 			<?php get_template_part( 'content', 'none' ); ?>
 
 		<?php endif; ?>
+
+			<?php do_action('yearn_primary_bottom', 'primary', 'bottom' ); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

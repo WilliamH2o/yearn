@@ -36,7 +36,7 @@
 
 	.entry-meta a { color: <?php echo get_theme_mod( 'yearn-colors-content-title_text' ); ?>; }
 
-	h3.entry-title { background-color: <?php // echo shadeColor( get_theme_mod( 'yearn-colors-content-title_background' ), -10) ?>;}
+	h3.entry-title { background-color: <?php // echo yearn_shade_color( get_theme_mod( 'yearn-colors-content-title_background' ), -10) ?>;}
 
 	.entry-excerpt { background-color: <?php echo get_theme_mod( 'yearn-colors-archives-content_background' ) ?>;}
 
@@ -90,8 +90,10 @@
 	.edit-link a,
 	.nav-links a,
 	button,
-	.button,
 	.comment-reply-link,
+	a.button,
+	.button a,
+	.widget_nav_menu .button a,
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"] {
@@ -99,6 +101,25 @@
 		color: <?php echo get_theme_mod( 'yearn-colors-content-button-text' ); ?>;
 	}
 
+	#masthead button, #masthead a.button, #masthead .button a, #masthead input[type="button"], #masthead input[type="reset"], #masthead input[type="submit"] {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-masthead-button-background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-masthead-button-text' ); ?>;
+	}
+
+	#yearn-top-bar button, #yearn-top-bar a.button, #yearn-top-bar .button a, #yearn-top-bar input[type="button"], #yearn-top-bar input[type="reset"], #yearn-top-bar input[type="submit"] {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-topbar-button-background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-topbar-button-text' ); ?>;
+	}
+
+	#yearn-stripe button, #yearn-stripe a.button, #yearn-stripe .button a, #yearn-stripe input[type="button"], #yearn-stripe input[type="reset"], #yearn-stripe input[type="submit"] {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-stripe-button-background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-topbar-stripe-text' ); ?>;
+	}
+
+	#yearn-site-header button, #yearn-site-header a.button, #yearn-site-header .button a, #yearn-site-header input[type="button"], #yearn-site-header input[type="reset"], #yearn-site-header input[type="submit"] {
+		background-color: <?php echo get_theme_mod( 'yearn-colors-site-header-button-background' ); ?>;
+		color: <?php echo get_theme_mod( 'yearn-colors-site-header-button-text' ); ?>;
+	}
 
 	#yearn-site-footer {
 		background-color: <?php echo get_theme_mod( 'yearn-colors-footer-background' ); ?>;
@@ -125,7 +146,7 @@
 	.widget :-ms-input-placeholder { color: color: <?php echo $color_two_fg ?>; opacity: .5 }
 
 	/*.entry-meta,*/
-	/*.entry-meta a { color: */<?php //echo shadeColor( '#fff', 40); ?>/* }*/
+	/*.entry-meta a { color: */<?php //echo yearn_shade_color( '#fff', 40); ?>/* }*/
 
 
 </style>

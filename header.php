@@ -36,6 +36,7 @@
  * clean search http://192.168.1.125/wptest/?s=Adminimize
  * editor-style.css
  * WooCommerce friendly
+ * menu descriptions
  *
  * */
 ?>
@@ -68,5 +69,5 @@
 	<?php do_action('yearn_site_content_top', 'content', 'top');  ?>
 
 	<div class="row main">
-
+<p></p>
 			<?php do_action( 'yearn_site_content_begin', 'content', 'begin' ); ?>

@@ -50,7 +50,7 @@ add_action( 'yearn_masthead', 'yearn_topbar', 30 );
 	 * Does yearn_customize_sections for topbar
 	 */
 	function yearn_topbar_sections() {
-		yearn_customize_sections( 'yearn-topbar-sections', 'topbar' );
+		yearn_customize_sections( 'yearn-topbar-sections', 'topbar', __( 'Top Bar', 'yearn' ) );
 	}
 	add_action('yearn_topbar', 'yearn_topbar_sections');
 
@@ -82,7 +82,7 @@ add_action( 'yearn_masthead', 'yearn_stripe', 40 );
 if ( ! function_exists( 'yearn_register_stripe_widgets' ) ) {
 	function yearn_register_stripe_widgets()
 	{
-		yearn_init_widgets('yearn-stripe-sections', 'stripe', __('Stripe', 'yearn'));
+		yearn_init_widgets( 'yearn-stripe-sections', 'stripe', __( 'Stripe', 'yearn' ) );
 	}
 }
 	add_action('after_setup_theme', 'yearn_register_stripe_widgets', 10);
@@ -91,7 +91,7 @@ if ( ! function_exists( 'yearn_register_stripe_widgets' ) ) {
 	 * Does yearn_customize_sections for stripe
 	 */
 	function yearn_stripe_sections() {
-		yearn_customize_sections( 'yearn-stripe-sections', 'stripe' );
+		yearn_customize_sections( 'yearn-stripe-sections', 'stripe', __('Stripe', 'yearn') );
 	}
 	add_action('yearn_stripe', 'yearn_stripe_sections', 10);
 
@@ -120,7 +120,7 @@ add_action( 'yearn_masthead', 'yearn_site_header', 50 );
 	 * Does yearn_init_widgets for header
 	 */
 	function yearn_register_header_widgets() {
-		yearn_init_widgets('yearn-header-sections', 'header', __('Header', 'yearn') );
+		yearn_init_widgets( 'yearn-header-sections', 'header', __( 'Header', 'yearn' ) );
 	}
 	add_action( 'after_setup_theme', 'yearn_register_header_widgets' );
 
@@ -128,7 +128,7 @@ add_action( 'yearn_masthead', 'yearn_site_header', 50 );
 	 * Does yearn_customize_sections for header
 	 */
 	function yearn_header_sections() {
-		yearn_customize_sections( 'yearn-header-sections', 'header' );
+		yearn_customize_sections( 'yearn-header-sections', 'header', __( 'Header', 'yearn' ) );
 	}
 	add_action('yearn_site_header', 'yearn_header_sections');
 
@@ -156,7 +156,7 @@ add_action( 'yearn_colophon', 'yearn_site_footer', 10 );
  * Creates yearn-footer-sections widgets
  */
 function yearn_register_site_footer_widgets() {
-	yearn_init_widgets('yearn-footer-sections', 'site-footer', __('Footer', 'yearn') );
+	yearn_init_widgets( 'yearn-footer-sections', 'site-footer', __( 'Footer', 'yearn' ) );
 }
 add_action( 'after_setup_theme', 'yearn_register_site_footer_widgets' );
 
@@ -164,7 +164,7 @@ add_action( 'after_setup_theme', 'yearn_register_site_footer_widgets' );
  * Outputs yearn-footer-sections
  */
 function yearn_site_footer_sections() {
-	yearn_customize_sections( 'yearn-footer-sections', 'site-footer' );
+	yearn_customize_sections( 'yearn-footer-sections', 'site-footer', __( 'Footer', 'yearn' ) );
 }
 add_action('yearn_site_footer', 'yearn_site_footer_sections');
 
@@ -192,7 +192,7 @@ add_action( 'yearn_colophon', 'yearn_bottombar', 10 );
  * Creates yearn-bottombar-sections widgets
  */
 function yearn_register_bottombar_widgets() {
-	yearn_init_widgets('yearn-bottombar-sections', 'bottombar', __('Bottom bar', 'yearn') );
+	yearn_init_widgets( 'yearn-bottombar-sections', 'bottombar', __( 'Bottom bar', 'yearn' ) );
 }
 add_action( 'after_setup_theme', 'yearn_register_bottombar_widgets' );
 
@@ -200,7 +200,7 @@ add_action( 'after_setup_theme', 'yearn_register_bottombar_widgets' );
  * Outputs yearn-bottombar-sections
  */
 function yearn_bottombar_sections() {
-	yearn_customize_sections( 'yearn-bottombar-sections', 'bottombar' );
+	yearn_customize_sections( 'yearn-bottombar-sections', 'bottombar', __( 'Bottom bar', 'yearn' ) );
 }
 add_action('yearn_bottombar', 'yearn_bottombar_sections');
 
@@ -224,21 +224,279 @@ if ( ! function_exists( 'yearn_home_page_top_content' ) ) {
 }
 add_action( 'yearn_home_page_primary_top', 'yearn_home_page_top_content', 10 );
 
+	/**
+	 * Creates yearn-bottombar-sections widgets
+	 */
+	function yearn_register_home_page_top_widgets() {
+		yearn_init_widgets( 'yearn-home_page_top-sections', 'home_page_top', __( 'Home Page Top', 'yearn' ) );
+	}
+	add_action( 'after_setup_theme', 'yearn_register_home_page_top_widgets' );
+
+	/**
+	 * Outputs yearn-bottombar-sections
+	 */
+	function yearn_home_page_top_sections() {
+		yearn_customize_sections( 'yearn-home_page_top-sections', 'home_page_top',  __( 'Home Page Top', 'yearn' ) );
+	}
+	add_action('yearn_home_page_top_content', 'yearn_home_page_top_sections');
+
+/**
+ * Home Page Bottom
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_home_page_bottom_content' ) ) {
+	function yearn_home_page_bottom_content() {
+		if ( has_action( 'yearn_home_page_bottom_content' ) ) { ?>
+
+			<div id="yearn_home_page_bottom" class="<?php echo ( '1' == get_theme_mod( 'yearn-home_page_bottom-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_home_page_bottom_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_home_page_primary_bottom', 'yearn_home_page_bottom_content', 10 );
+
+/**
+ * Pages Top
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_pages_top_content' ) ) {
+	function yearn_pages_top_content() {
+		if ( has_action( 'yearn_pages_top_content' ) ) { ?>
+
+			<div id="yearn_pages_top" class="<?php echo ( '1' == get_theme_mod( 'yearn-pages_top-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_pages_top_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_page_primary_top', 'yearn_pages_top_content', 10 );
+
 /**
  * Creates yearn-bottombar-sections widgets
  */
-function yearn_register_home_page_top_widgets() {
-	yearn_init_widgets('yearn-home_page_top-sections', 'home_page_top', __('Home Page Top', 'yearn') );
+function yearn_register_pages_top_widgets() {
+	yearn_init_widgets( 'yearn-pages_top-sections', 'pages_top', __( 'Home Page Top', 'yearn' ) );
 }
-add_action( 'after_setup_theme', 'yearn_register_home_page_top_widgets' );
+add_action( 'after_setup_theme', 'yearn_register_pages_top_widgets' );
 
 /**
  * Outputs yearn-bottombar-sections
  */
-function yearn_home_page_top_sections() {
-	yearn_customize_sections( 'yearn-home_page_top-sections', 'home_page_top' );
+function yearn_pages_top_sections() {
+	yearn_customize_sections( 'yearn-pages_top-sections', 'pages_top',  __( 'Home Page Top', 'yearn' ) );
 }
-add_action('yearn_home_page_top_content', 'yearn_home_page_top_sections');
+add_action('yearn_pages_top_content', 'yearn_pages_top_sections');
+
+/**
+ * Pages Bottom
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_pages_bottom_content' ) ) {
+	function yearn_pages_bottom_content() {
+		if ( has_action( 'yearn_pages_bottom_content' ) ) { ?>
+
+			<div id="yearn_pages_bottom" class="<?php echo ( '1' == get_theme_mod( 'yearn-pages_bottom-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_pages_bottom_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_page_primary_bottom', 'yearn_pages_bottom_content', 10 );
+
+/**
+ * Creates yearn-bottombar-sections widgets
+ */
+function yearn_register_pages_bottom_widgets() {
+	yearn_init_widgets( 'yearn-pages_bottom-sections', 'pages_bottom', __( 'Home Page Bottom', 'yearn' ) );
+}
+add_action( 'after_setup_theme', 'yearn_register_pages_bottom_widgets' );
+
+/**
+ * Outputs yearn-bottombar-sections
+ */
+function yearn_pages_bottom_sections() {
+	yearn_customize_sections( 'yearn-pages_bottom-sections', 'pages_bottom',  __( 'Home Page Bottom', 'yearn' ) );
+}
+add_action('yearn_pages_bottom_content', 'yearn_pages_bottom_sections');
+
+/**
+ * posts Top
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_posts_top_content' ) ) {
+	function yearn_posts_top_content() {
+		if ( has_action( 'yearn_posts_top_content' ) ) { ?>
+
+			<div id="yearn_posts_top" class="<?php echo ( '1' == get_theme_mod( 'yearn-posts_top-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_posts_top_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_single_primary_top', 'yearn_posts_top_content', 10 );
+
+	/**
+	 * Creates yearn-bottombar-sections widgets
+	 */
+	function yearn_register_posts_top_widgets() {
+		yearn_init_widgets( 'yearn-posts_top-sections', 'posts_top', __( 'Home Page Top', 'yearn' ) );
+	}
+	add_action( 'after_setup_theme', 'yearn_register_posts_top_widgets' );
+	
+	/**
+	 * Outputs yearn-bottombar-sections
+	 */
+	function yearn_posts_top_sections() {
+		yearn_customize_sections( 'yearn-posts_top-sections', 'posts_top',  __( 'Home Page Top', 'yearn' ) );
+	}
+	add_action('yearn_posts_top_content', 'yearn_posts_top_sections');
+
+/**
+ * posts Bottom
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_posts_bottom_content' ) ) {
+	function yearn_posts_bottom_content() {
+		if ( has_action( 'yearn_posts_bottom_content' ) ) { ?>
+
+			<div id="yearn_posts_bottom" class="<?php echo ( '1' == get_theme_mod( 'yearn-posts_bottom-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_posts_bottom_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_single_primary_bottom', 'yearn_posts_bottom_content', 10 );
+
+	/**
+	 * Creates yearn-bottombar-sections widgets
+	 */
+	function yearn_register_posts_bottom_widgets() {
+		yearn_init_widgets( 'yearn-posts_bottom-sections', 'posts_bottom', __( 'Home Page Bottom', 'yearn' ) );
+	}
+	add_action( 'after_setup_theme', 'yearn_register_posts_bottom_widgets' );
+	
+	/**
+	 * Outputs yearn-bottombar-sections
+	 */
+	function yearn_posts_bottom_sections() {
+		yearn_customize_sections( 'yearn-posts_bottom-sections', 'posts_bottom',  __( 'Home Page Bottom', 'yearn' ) );
+	}
+	add_action('yearn_posts_bottom_content', 'yearn_posts_bottom_sections');
+
+/**
+ * archives Top
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_archives_top_content' ) ) {
+	function yearn_archives_top_content() {
+		if ( has_action( 'yearn_archives_top_content' ) ) { ?>
+
+			<div id="yearn_archives_top" class="<?php echo ( '1' == get_theme_mod( 'yearn-archives_top-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_archives_top_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_blog_page_primary_top', 'yearn_archives_top_content', 10 );
+add_action( 'yearn_author_primary_top', 'yearn_archives_top_content', 10 );
+add_action( 'yearn_search_primary_top', 'yearn_archives_top_content', 10 );
+add_action( 'yearn_archive_primary_top', 'yearn_archives_top_content', 10 );
+
+/**
+ * Creates yearn-bottombar-sections widgets
+ */
+function yearn_register_archives_top_widgets() {
+	yearn_init_widgets( 'yearn-archives_top-sections', 'archives_top', __( 'Home Page Top', 'yearn' ) );
+}
+add_action( 'after_setup_theme', 'yearn_register_archives_top_widgets' );
+
+/**
+ * Outputs yearn-bottombar-sections
+ */
+function yearn_archives_top_sections() {
+	yearn_customize_sections( 'yearn-archives_top-sections', 'archives_top',  __( 'Home Page Top', 'yearn' ) );
+}
+add_action('yearn_archives_top_content', 'yearn_archives_top_sections');
+
+/**
+ * archives Bottom
+ *
+ * Outputs #yearn-bottom-bar and do_action( 'yearn_bottombar' )
+ */
+if ( ! function_exists( 'yearn_archives_bottom_content' ) ) {
+	function yearn_archives_bottom_content() {
+		if ( has_action( 'yearn_archives_bottom_content' ) ) { ?>
+
+			<div id="yearn_archives_bottom" class="<?php echo ( '1' == get_theme_mod( 'yearn-archives_bottom-padding' ) ? 'fill-horizontally' : '') ?>">
+				<div class="row middle">
+					<?php do_action( 'yearn_archives_bottom_content' );?>
+				</div>
+			</div>
+
+		<?php }
+	}
+}
+add_action( 'yearn_blog_page_primary_bottom', 'yearn_archives_bottom_content', 10 );
+add_action( 'yearn_author_primary_bottom', 'yearn_archives_bottom_content', 10 );
+add_action( 'yearn_search_primary_bottom', 'yearn_archives_bottom_content', 10 );
+add_action( 'yearn_single_primary_bottom', 'yearn_archives_bottom_content', 10 );
+
+/**
+ * Creates yearn-bottombar-sections widgets
+ */
+function yearn_register_archives_bottom_widgets() {
+	yearn_init_widgets( 'yearn-archives_bottom-sections', 'archives_bottom', __( 'Home Page Bottom', 'yearn' ) );
+}
+add_action( 'after_setup_theme', 'yearn_register_archives_bottom_widgets' );
+
+/**
+ * Outputs yearn-bottombar-sections
+ */
+function yearn_archives_bottom_sections() {
+	yearn_customize_sections( 'yearn-archives_bottom-sections', 'archives_bottom',  __( 'Home Page Bottom', 'yearn' ) );
+}
+add_action('yearn_archives_bottom_content', 'yearn_archives_bottom_sections');
+
+/**
+ * Creates yearn-bottombar-sections widgets
+ */
+function yearn_register_home_page_bottom_widgets() {
+	yearn_init_widgets( 'yearn-home_page_bottom-sections', 'home_page_bottom', __( 'Home Page bottom', 'yearn' ) );
+}
+add_action( 'after_setup_theme', 'yearn_register_home_page_bottom_widgets' );
+
+/**
+ * Outputs yearn-bottombar-sections
+ */
+function yearn_home_page_bottom_sections() {
+	yearn_customize_sections( 'yearn-home_page_bottom-sections', 'home_page_bottom',  __( 'Home Page bottom', 'yearn' ) );
+}
+add_action('yearn_home_page_bottom_content', 'yearn_home_page_bottom_sections');
 
 /**
  * yearn_customize_sections()
@@ -249,10 +507,34 @@ add_action('yearn_home_page_top_content', 'yearn_home_page_top_sections');
  * @param $for
  */
 if ( ! function_exists( 'yearn_customize_sections' ) ) {
-	function yearn_customize_sections( $theme_mod_id, $for ){
+	function yearn_customize_sections( $theme_mod_id, $for, $name ){
 
 		$sections = get_theme_mod( $theme_mod_id );
-//		echo $sections;
+
+		if ( 'none' != $sections ) {
+			$a_section = explode('/', $sections);
+			//var_dump($a_section);
+			for ( $i = 0; $i <= count( $a_section ) - 1; $i++ ) {
+
+				echo '<div class=" col-' . $a_section[$i] . ' col">';
+				$section_col =  get_theme_mod($theme_mod_id.'-col_'.($i+1));
+				if ( $section_col == 'none' ) {
+				} elseif ( $section_col == 'logo' ) {
+					yearn_site_branding();
+				} elseif ( $section_col == 'text' ) {
+					yearn_site_branding();
+				} elseif ( strpos($section_col,'widget') !== false ) {
+					dynamic_sidebar( $for . '-' . ( $i + 1 ) );
+				} elseif ( strpos($section_col,'menu') !== false ) {
+					yearn_site_navigation();
+				}
+
+				echo '</div>';
+
+			}
+		}
+		return;
+
 		if ( 'none' != $sections ) {
 
 			// sections logo, small_widget, medium_widget, large_widget, full_widget
@@ -320,18 +602,25 @@ function yearn_init_widgets($theme_mod_id, $for, $name) {
 
 	$sections = get_theme_mod( $theme_mod_id );
 
-	for ($i = 1; $i <= substr_count($sections, 'widget'); $i++) {
+	if ( 'none' != $sections ) {
+		$a_section = explode('/', $sections);
 
-		register_sidebar(array(
-			'name' => $name . ' ' . $i,
-			'id' => $for . '-' . $i,
-			'description' => __( $name . ' Widget Area', 'yearn'), // todo: if this doesn't translate then remove description
-			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h1 class="widget-title">',
-			'after_title' => '</h1>',
-		));
+		for ( $i = 0; $i <= count( $a_section ) - 1; $i++ ) {
+			$section_col =  get_theme_mod( $theme_mod_id . '-col_' . ( $i + 1 ) );
+			if  ( strpos( $section_col, 'widget' ) !== false ) {
 
+				register_sidebar( array(
+					'name' => $name . ' ' . ( $i + 1 ),
+					'id' => $for . '-' . ( $i + 1 ),
+					'description' => __($name . ' Widget Area', 'yearn'), // todo: if this doesn't translate then remove description
+					'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+					'after_widget' => '</aside>',
+					'before_title' => '<h1 class="widget-title">',
+					'after_title' => '</h1>',
+				));
+
+			}
+		}
 	}
 }
 

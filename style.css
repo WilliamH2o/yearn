@@ -205,6 +205,15 @@ and Blueprint http://www.blueprintcss.org/
 	/*[class*=col]+[class*=col]:last-child {float:right }*/
 
 	@media only screen {
+
+		.col-20 {
+			-webkit-flex-basis: 20%;
+			-ms-flex-preferred-size: 20%;
+			flex-basis: 20%;
+			max-width: 20%;
+		}
+
+		.col-25,
 		.search-submit {
 			-webkit-flex-basis: 25%;
 			-ms-flex-preferred-size: 25%;
@@ -212,6 +221,42 @@ and Blueprint http://www.blueprintcss.org/
 			max-width: 25%;
 		}
 
+		.col-33 {
+			-webkit-flex-basis: 33%;
+			-ms-flex-preferred-size: 33%;
+			flex-basis: 33%;
+			max-width: 33%;
+		}
+
+		.col-40 {
+			-webkit-flex-basis: 40%;
+			-ms-flex-preferred-size: 40%;
+			flex-basis: 40%;
+			max-width: 40%;
+		}
+
+		.col-50 {
+			-webkit-flex-basis: 50%;
+			-ms-flex-preferred-size: 50%;
+			flex-basis: 50%;
+			max-width: 50%;
+		}
+
+		.col-60 {
+			-webkit-flex-basis: 60%;
+			-ms-flex-preferred-size: 60%;
+			flex-basis: 60%;
+			max-width: 60%;
+		}
+
+		.col-66 {
+			-webkit-flex-basis: 66%;
+			-ms-flex-preferred-size: 66%;
+			flex-basis: 66%;
+			max-width: 66%;
+		}
+
+		.col-75,
 		.search-field {
 			-webkit-flex-basis: 75%;
 			-ms-flex-preferred-size: 75%;
@@ -220,6 +265,7 @@ and Blueprint http://www.blueprintcss.org/
 		}
 
 		/*.full .site-branding,*/
+		.col-100,
 		.full .main-navigation,
 		.content-area,
 		.recent-post,
@@ -310,7 +356,6 @@ and Blueprint http://www.blueprintcss.org/
 
 		.full_widget,
 		.full_column {
-			padding: 0;
 			-webkit-flex-basis: 100%;
 			-ms-flex-preferred-size: 100%;
 			flex-basis: 100%;
@@ -685,6 +730,8 @@ and Blueprint http://www.blueprintcss.org/
 	tr:nth-child(even) {
 		background-color: rgba(255, 255, 255, .8);
 	}
+
+	.jumbotron { font-size: 1.5em; }
 }
 
 /***************************************************************
@@ -701,14 +748,14 @@ and Blueprint http://www.blueprintcss.org/
 	}
 
 	button,
-	.button,
+	a.button,
+	.button a,
+	#masthead .widget_nav_menu .button a, /* I don't like this specificity */
+	.widget_nav_menu .button a,
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"] {
 		cursor: pointer; /* Improves usability and consistency of cursor style between image-type 'input' and others */
-		-webkit-appearance: button; /* Corrects inability to style clickable 'input' types in iOS */
-		min-height: 55px;
-		min-width: 55px;
 		line-height: 1em;
 		padding: .764em 1.5em;
 		border: 0;
@@ -717,7 +764,13 @@ and Blueprint http://www.blueprintcss.org/
 		-moz-border-radius: 8px;
 		border-radius: 8px;
 		text-align: center;
+		margin-top: -2px;
+
 	}
+
+	input[type="button"],
+	input[type="reset"],
+	input[type="submit"] { -webkit-appearance: button; /* Corrects inability to style clickable 'input' types in iOS */ }
 
 	button:hover,
 	.button:hover,
@@ -812,6 +865,13 @@ and Blueprint http://www.blueprintcss.org/
 	a {
 		text-decoration: none;
 		padding: 2px 1px; /* a little padding to help <a> not be consumed by the outline on :focus */
+		transition-delay: .2s;
+		transition-duration: .2s;
+	}
+
+	a:hover {
+		transition-delay: 0s;
+		transition-duration: 0s;
 	}
 
 	a:hover,
@@ -842,7 +902,7 @@ and Blueprint http://www.blueprintcss.org/
 		padding-right: 0;
 	}
 
-	#yearn-top-bar .widget:last-of-type { float: right;}
+	/*#yearn-top-bar .widget:last-of-type { float: right;}*/
 
 	.hmenu ul,
 	#masthead .widget_nav_menu ul,
@@ -861,7 +921,6 @@ and Blueprint http://www.blueprintcss.org/
 	.hmenu a,
 	#masthead .widget_nav_menu a,
 	#yearn-bottom-bar .widget_nav_menu a {
-		color: inherit;
 		display: inline-block;
 		padding: 1em;
 		text-decoration: none;
@@ -870,7 +929,12 @@ and Blueprint http://www.blueprintcss.org/
 	.hmenu a:hover,
 	#masthead .widget_nav_menu a:hover,
 	#yearn-bottom-bar .widget_nav_menu a:hover {
-		background-color: rgba(0,0,0,.2);
+		opacity: .98;
+	}
+
+	#yearn-top-bar .widget_nav_menu a {
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 
 	.top-bar:first-of-type .hmenu a {
@@ -937,8 +1001,8 @@ and Blueprint http://www.blueprintcss.org/
 		text-decoration: none;
 	}
 
-	a:not([href]):hover,
-	#masthead .widget_nav_menu a:hover
+	a:not([href]):hover
+	/*#masthead .widget_nav_menu a:hover*/
 	/*,
 	*//*.widget li a:not([href]):hover,
 	.hmenu li > a:not([href]):hover*/ {
@@ -961,6 +1025,10 @@ and Blueprint http://www.blueprintcss.org/
 	#yearn-top-bar .current-menu-item > a,
 	#yearn-top-bar .current-menu-ancestor > a {
 		background-color: inherit;
+	}
+	#masthead div div:last-of-type .widget_nav_menu	{
+		margin-right: -1.5em;
+		float: right;
 	}
 
 	.sf-with-ul::after {
@@ -1226,6 +1294,11 @@ and Blueprint http://www.blueprintcss.org/
 		float: right;
 		margin-left: 1.5em;
 	}
+
+	.text-center { text-align: center; }
+	.text-left { text-align: left; }
+	.text-right { text-align: right; }
+	.text-justify { text-align: justify; }
 }
 
 /***************************************************************
@@ -1573,7 +1646,9 @@ and Blueprint http://www.blueprintcss.org/
 	.widget input[type="button"],
 	.widget input[type="reset"],
 	.widget input[type="submit"] {
-		opacity: .5
+
+		/* todo
+		opacity: .5*/
 	}
 
 	.widget button:hover,
@@ -1755,7 +1830,7 @@ and Blueprint http://www.blueprintcss.org/
 		border-top-width: 1px;
 		border-bottom-width: 1px;
 		font-size: .618rem;
-		padding: .618em;
+		padding: .2618em;
 	}
 
 	#yearn-stripe {
@@ -1798,6 +1873,11 @@ and Blueprint http://www.blueprintcss.org/
 
 	#masthead a {
 		text-decoration: none
+	}
+
+	#masthead a:hover,
+	#masthead a:visited {
+		opacity: .95;
 	}
 
 	.site-branding {
